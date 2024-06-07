@@ -1,8 +1,0 @@
-{
-  "history": { "title": "History" },
-  "issues": { "title": "Issues" },
-  "next-perf": { "title": "Next's Built In Performance Features" },
-  "core-web-vitals": {
-    "title": "Core Web Vitals"
-  }
-}

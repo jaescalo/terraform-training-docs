@@ -1,0 +1,11 @@
+{
+  "multi-environments": { 
+    "title": "Multiple Environments" 
+  },
+  "onboarding": { 
+    "title": "Domain Onboarding" 
+  },
+  "ci-cd": { 
+    "title": "CI/CD" 
+  }
+}

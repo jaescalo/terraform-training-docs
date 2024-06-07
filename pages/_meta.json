@@ -2,14 +2,14 @@
   "index": {
     "title": "Introduction"
   },
-  "what's-next": {
-    "title": "What's Next?"
+  "requirements": {
+    "title": "Requirements"
   },
-  "react": {
-    "title": "React"
+  "fundamentals": {
+    "title": "Fundamentals"
   },
-  "performance": {
-    "title": "Performance"
+  "use-cases": {
+    "title": "Use Cases"
   },
   "helpful-links": {
     "title": "Helpful Links"

@@ -1,24 +1,15 @@
 # Introduction
 
-Next.js is a full-stack [React](https://react.dev/learn) Single Page Application framework. It’s versatile and lets you create React apps of any size—from a mostly static blog to a complex dynamic application. To create a new Next.js project, run in your terminal:
+By the end of this workshop a new application will be onboarded to Akamai by leveraging only Terraform.
+* A [Linode](https://www.linode.com/) (Akamai Edge Compute) will be setup to serve as the origin
+* A new configuration in Property Manager
 
-```bash filename="Terminal" {3} copy
-npx create-next-app@latest
-```
+## What is Terraform?
 
-[Next.js](https://github.com/vercel/next.js) is maintained by [Vercel](https://vercel.com/). You can deploy a Next.js app to any Node.js or serverless hosting, or to your own server. Next.js also supports a static export which doesn’t require a server.
+[HashiCorp Terraform](https://www.terraform.io/) is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
 
-## The History Of Next
+## What is Infrastructure as Code (IaC)?
 
-![next-history](../images/next-history.webp)
+Infrastructure as Code (IaC) is the managing and provisioning of infrastructure through code instead of through manual processes.
 
-## Main Features
-
-| Feature         | Description                                                                                                                                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Routing`       | A file-system based router built on top of Server Components that supports layouts, nested routing, loading states, error handling, and more.                                                    |
-| `Rendering`     | Client-side and Server-side Rendering with Client and Server Components. Further optimized with Static and Dynamic Rendering on the server with Next.js. Streaming on Edge and Node.js runtimes. |
-| `Data Fetching` | Simplified data fetching with async/await in Server Components, and an extended fetch API for request memoization, data caching and revalidation.                                                |
-| `Styling`       | Support for your preferred styling methods, including CSS Modules, Tailwind CSS, and CSS-in-JS                                                                                                   |
-| `Optimizations` | Image, Fonts, and Script Optimizations to improve your application's Core Web Vitals and User Experience.                                                                                        |
-| `TypeScript`    | Improved support for TypeScript, with better type checking and more efficient compilation, as well as custom TypeScript Plugin and type checker.                                                 |
+With IaC, configuration files are created that contain your infrastructure specifications, which makes it easier to edit and distribute configurations. It also ensures that you provision the same environment every time. 

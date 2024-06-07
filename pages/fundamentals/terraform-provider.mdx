@@ -1,0 +1,32 @@
+# Terraform Provider
+
+Explain terraform block
+
+```hcl filename="main.tf" {4} copy
+terraform {
+  required_providers {
+    akamai = {
+      source  = "linode/linode"
+      version = "2.22.0"
+    }
+  }
+  required_version = ">= 0.13"
+}
+```
+Explain the above...
+Run the code from above...
+
+## Provider Configurations
+Different providers have different configurations:
+
+```hcl filename="main.tf" {3} copy
+# Configure the Linode Provider
+provider "linode" {
+  token = "ABC123XYZ789"
+}
+```
+Explain the above...
+Add the above to your code and re-run...
+
+
+**Best Practice: add inline documentation to the code**

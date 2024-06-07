@@ -1,1 +1,1 @@
-# Akamai Next.js Course Docs
+# Terraform Training by Akamai Advanced Solutions Team
