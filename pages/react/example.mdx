@@ -1,0 +1,15 @@
+# Example
+
+This is an example of a React App that uses React hooks and props to demo the idea of a top down data flow and the ability to use the built in hooks like useState and useEffect to define logic.
+
+In this app, the child and grandchild will inherit the last name of the parent unless otherwise defined, when the child changes, the grandchild will automatically change to match the grandchild unless otherwise defined.
+Each component has it's own logic but also can consume the data of the parent component.
+
+View the code for the following app [here](./example-code.mdx)
+
+---
+
+import MyApp from "../../hooks-props/App";
+import styles from "../../hooks-props/app.module.css";
+
+<MyApp />

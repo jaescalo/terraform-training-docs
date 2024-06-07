@@ -1,15 +1,23 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
+  "index": {
+    "title": "Introduction"
+  },
+  "what's-next": {
+    "title": "What's Next?"
+  },
+  "react": {
+    "title": "React"
+  },
+  "performance": {
+    "title": "Performance"
+  },
+  "helpful-links": {
+    "title": "Helpful Links"
   },
   "contact": {
     "title": "Contact ↗",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "",
     "newWindow": true
   }
 }

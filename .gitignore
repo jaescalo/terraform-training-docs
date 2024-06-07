@@ -1,3 +1,5 @@
 .next
 node_modules
+extra
+
 .DS_Store

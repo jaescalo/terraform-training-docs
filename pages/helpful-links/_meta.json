@@ -1,0 +1,56 @@
+{
+  "react-docs": {
+    "title": "React Official Documentation",
+    "type": "page",
+    "href": "https://react.dev/learn",
+    "newWindow": true
+  },
+  "next-docs": {
+    "title": "Next Official Documentation",
+    "type": "page",
+    "href": "https://nextjs.org/docs",
+    "newWindow": true
+  },
+  "next-versions": {
+    "title": "Next Version History",
+    "type": "page",
+    "href": "https://nextjs.org/blog",
+    "newWindow": true
+  },
+  "next-routing": {
+    "title": "Intro to Next Routing",
+    "type": "page",
+    "href": "hhttps://dev.to/sarveshh/nextjs-routing-a-comprehensive-guide-to-building-single-page-applications-3l90",
+    "newWindow": true
+  },
+  "next-mobile-perf": {
+    "title": "Mobile Performance of Next.js Sites",
+    "type": "page",
+    "href": "https://calendar.perfplanet.com/2022/mobile-performance-of-next-js-sites/",
+    "newWindow": true
+  },
+  "why-i-wont-use-nextjs": {
+    "title": "Why I Won't Use Next.js",
+    "type": "page",
+    "href": "https://www.epicweb.dev/why-i-wont-use-nextjs",
+    "newWindow": true
+  },
+  "why-im-using-nextjs": {
+    "title": "Why I'm Using Next.js",
+    "type": "page",
+    "href": "https://leerob.io/blog/using-nextjs",
+    "newWindow": true
+  },
+  "doordash": {
+    "title": "Doordash Web Performance & SSR",
+    "type": "page",
+    "href": "https://doordash.engineering/2022/03/29/improving-web-page-performance-at-doordash-throughserver-side-rendering-with-next-js/",
+    "newWindow": true
+  },
+  "cdn-cache-problems": {
+    "title": "GitHub Issue - RSC and CDN Cache problems make Next.js useless",
+    "type": "page",
+    "href": "https://github.com/vercel/next.js/discussions/59167",
+    "newWindow": true
+  }
+}
