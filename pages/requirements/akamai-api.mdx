@@ -1,0 +1,69 @@
+# Generating Akamai API Credentials
+
+Before we can use Terraform with Akamai, we need to set up API credentials. These credentials will allow Terraform to interact with Akamai's Property Manager and Security services.
+
+## Steps to Create Akamai API Credentials
+
+1. Log in to the [Akamai Control Center](https://control.akamai.com/).
+2. Navigate to "Identity & Access" → "API Users & Keys".
+3. Click on "Create API Client".
+4. Fill in the form:
+   - Name: Choose a descriptive name (e.g., "Terraform-Akamai")
+   - Description: Briefly describe the purpose (e.g., "API client for Terraform automation")
+   - API Service: Select "Property Manager API (PAPI)" and "Security API"
+   - Access Level: Choose "READ-WRITE" for both APIs
+5. Click "Create Client".
+
+![Akamai API Client Creation](images/akamai-api-client.png)
+
+> ⚠️ **Important:** After creation, you'll see the client secret and other credentials. Download or copy these immediately—you won't be able to access the client secret again.
+
+## Understanding Your Akamai API Credentials
+
+You'll receive four pieces of information:
+
+1. Client Token
+2. Client Secret
+3. Access Token
+4. Base URL
+
+All of these are required to authenticate your API requests to Akamai.
+
+## Using Akamai Credentials with Terraform
+
+To use these credentials with Terraform, you can set them as environment variables:
+
+```bash
+export AKAMAI_CLIENT_SECRET="your_client_secret"
+export AKAMAI_HOST="your_base_url"
+export AKAMAI_ACCESS_TOKEN="your_access_token"
+export AKAMAI_CLIENT_TOKEN="your_client_token"
+```
+
+Alternatively, you can use an `.edgerc` file, which is a common way to store Akamai credentials:
+
+1. Create a file named .edgerc in your home directory.
+2. Add the following content:
+
+```
+[default]
+client_secret = your_client_secret
+host = your_base_url
+access_token = your_access_token
+client_token = your_client_token
+```
+
+## Best Practices for Akamai API Credential Security
+
+1. Never share your API credentials or commit them to your Git repository.
+2. Use environment variables or the .edgerc file to manage your credentials securely.
+3. Regularly rotate your API credentials, especially if you suspect they might have been compromised.
+4. Only grant the necessary permissions to your API client.
+
+## Next Steps
+
+With your Akamai API credentials set up, you're ready to start using Terraform to manage Akamai resources. In the next section, we'll begin configuring Terraform to work with Akamai Property Manager and Security services.
+
+---
+
+**Exercise:** Generate your Akamai API credentials following the steps above. Practice setting them as environment variables or in an `.edgerc` file. Verify that you can access your Akamai account programmatically using these credentials.

@@ -1,0 +1,70 @@
+# Git Basics: Essential Skills for Your Terraform Journey
+
+Before we dive into Terraform, let's ensure you're comfortable with Git. This version control system will be crucial for managing your infrastructure code and collaborating with others.
+
+## 1. Creating a New Repository
+
+Git allows you to track changes in your code over time. Let's start by creating a new repository:
+
+1. Navigate to [GitHub](https://github.com) and log in.
+2. Click the '+' icon in the top-right corner and select 'New repository'.
+3. Name your repository (e.g., 'terraform-training').
+4. Choose 'Public' or 'Private' visibility.
+5. Check 'Add a README file'.
+6. Click 'Create repository'.
+
+![Creating a new GitHub repository](images/create-repo.png)
+
+## 2. Setting Up SSH Keys
+
+SSH keys provide a secure way to connect with GitHub:
+
+1. Open your terminal.
+2. Generate a new SSH key:
+    ```bash
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+3. Start the ssh-agent:
+    ```bash
+    eval "$(ssh-agent -s)"
+4. Add your SSH key to the agent:
+    ```bash
+    ssh-add ~/.ssh/id_ed25519
+5. Copy your public key:
+    ```bash
+    cat ~/.ssh/id_ed25519.pub
+6. Go to GitHub Settings > SSH and GPG keys > New SSH key.
+7. Paste your key and save.
+
+## 3. Cloning Your Repository
+Now, let's get your repository on your local machine:
+```bash
+git clone git@github.com:yourusername/terraform-training.git
+cd terraform-training
+```
+
+## 4. Making Changes and Committing
+As you work on your Terraform configurations, you'll need to commit your changes:
+
+1. Make some changes to your files.
+2. Stage your changes:
+    ```bash
+    git add .
+3. Commit your changes:
+    ```bash
+    git commit -m "Add initial Terraform configuration"
+
+> 💡 **Tip:** Write clear, concise commit messages to document your work effectively.
+
+## 5. Pushing Your Changes
+Finally, let's push your local commits to GitHub:
+```bash
+git push origin main
+```
+
+## Next Steps
+
+Congratulations! You've mastered the Git basics needed for this course. Remember to commit and push your work regularly. In the next section, we'll start exploring Terraform fundamentals.
+
+---
+
+**Exercise:** Create a new repository for your Terraform projects, set up SSH, clone it locally, make a small change to the README, commit, and push. This will ensure you're ready for the journey ahead!
