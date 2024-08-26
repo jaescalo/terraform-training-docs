@@ -14,7 +14,8 @@ Before we can use Terraform with Akamai, we need to set up API credentials. Thes
    - Access Level: Choose "READ-WRITE" for both APIs
 5. Click "Create Client".
 
-![Akamai API Client Creation](images/akamai-api-client.png)
+![Akamai API Client Creation](images/requirements-akamai-api-create.png)
+![Akamai API Client Download](images/requirements-akamai-api-download.png)
 
 > ⚠️ **Important:** After creation, you'll see the client secret and other credentials. Download or copy these immediately—you won't be able to access the client secret again.
 
@@ -42,7 +43,7 @@ export AKAMAI_CLIENT_TOKEN="your_client_token"
 
 Alternatively, you can use an `.edgerc` file, which is a common way to store Akamai credentials:
 
-1. Create a file named .edgerc in your home directory.
+1. Create a file named `.edgerc` in your home directory.
 2. Add the following content:
 
 ```
@@ -52,6 +53,7 @@ host = your_base_url
 access_token = your_access_token
 client_token = your_client_token
 ```
+The `.edgerc` method will be used for the examples and exercises in this course.
 
 ## Best Practices for Akamai API Credential Security
 
