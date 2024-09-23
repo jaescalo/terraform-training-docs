@@ -40,14 +40,11 @@ const config: DocsThemeConfig = {
         property="og:description"
         content="A Terraform Training by Akamai Advanced Solutions Team"
       />
-      {/* <meta
-        property="og:image"
-        content=""
-      /> */}
+      <link rel="icon" href="/favicon.ico"></link>
     </head>
   ),
   project: {
-    link: "https://github.com/jaescalo/terraform-training-docs"
+    link: 'https://github.com/jaescalo/terraform-training-docs'
   },
   sidebar: {
     titleComponent({ title, type }) {
@@ -59,12 +56,9 @@ const config: DocsThemeConfig = {
     defaultMenuCollapseLevel: 1,
     toggleButton: true
   },
-  // chat: {
-  //   link: "https://discord.com"
-  // },
-  docsRepositoryBase: "https://github.com/jaescalo/terraform-training-docs",
+  docsRepositoryBase: 'https://github.com/jaescalo/terraform-training-docs',
   footer: {
-    text: "2024 Advanced Solutions Team - Akamai Technical Documentation"
+    text: '2024 Advanced Solutions Team - Akamai Technical Documentation'
   }
 };
 
