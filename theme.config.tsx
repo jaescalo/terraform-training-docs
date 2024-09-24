@@ -26,7 +26,7 @@ const config: DocsThemeConfig = {
     <head>
       <title>Terraform Training</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="author" content="Jaime Escalona" />
+      <meta name="author" content="" />
       <meta
         property="og:url"
         content="https://github.com/jaescalo/terraform-training-docs"
