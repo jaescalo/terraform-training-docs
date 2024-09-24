@@ -5,8 +5,8 @@
   "requirements": {
     "title": "Requirements"
   },
-  "fundamentals": {
-    "title": "Fundamentals"
+  "terraform": {
+    "title": "Terraform"
   },
   "use-cases": {
     "title": "Use Cases"

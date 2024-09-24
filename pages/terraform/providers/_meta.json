@@ -1,0 +1,11 @@
+{
+    "providers": {
+        "title": "Providers"
+    },
+    "linode-provider": {
+        "title": "Linode Provider"
+    },
+    "akamai-provider": {
+      "title": "Akamai Provider"
+    }
+}

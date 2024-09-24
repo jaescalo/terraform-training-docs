@@ -1,0 +1,47 @@
+{
+  "declarative-language": {
+    "title": "Declarative Language"
+  },
+  "core-workflow": {
+    "title": "Core Workflow"
+  },
+  "providers": {
+    "title": "Providers"
+  },
+  "data-sources": {
+    "title": "Resources"
+  },
+  "resources": {
+    "title": "Data Sources"
+  },
+  "state-file": {
+    "title": "Variables"
+  },
+  "locals": {
+    "title": "Locals"
+  },
+  "variables": {
+    "title": "Outputs"
+  },
+  "expressions": {
+    "title": "Expressions"
+  } ,
+  "meta-arguments": {
+    "title": "Meta-Arguments"
+  },
+  "built-in-functions": {
+    "title": "Built-In Functions"
+  },
+  "modules": {
+    "title": "Modules"
+  },
+  "state-management": {
+    "title": "State Management"
+  },
+  "imports": {
+    "title": "Imports"
+  },
+  "troubleshooting": {
+    "title": "Troubleshooting"
+  } 
+}

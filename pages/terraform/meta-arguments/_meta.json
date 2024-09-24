@@ -1,0 +1,14 @@
+{
+  "depends-on": {
+      "title": "depends_on"
+  },
+  "count": {
+    "title": "count"
+  },
+  "for-each": {
+    "title": "for_each"
+  },
+  "lifecycle": {
+    "title": "lifecycle"
+  }
+}
