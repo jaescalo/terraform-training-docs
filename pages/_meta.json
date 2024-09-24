@@ -2,15 +2,6 @@
   "index": {
     "title": "Introduction"
   },
-  "requirements": {
-    "title": "Requirements"
-  },
-  "terraform": {
-    "title": "Terraform"
-  },
-  "use-cases": {
-    "title": "Use Cases"
-  },
   "helpful-links": {
     "title": "Helpful Links"
   },
