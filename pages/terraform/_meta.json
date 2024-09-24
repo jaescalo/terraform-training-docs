@@ -9,18 +9,18 @@
     "title": "Providers"
   },
   "data-sources": {
-    "title": "Resources"
-  },
-  "resources": {
     "title": "Data Sources"
   },
-  "state-file": {
+  "resources": {
+    "title": "Resources"
+  },
+  "variables": {
     "title": "Variables"
   },
   "locals": {
     "title": "Locals"
   },
-  "variables": {
+  "outputs": {
     "title": "Outputs"
   },
   "expressions": {
