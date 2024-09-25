@@ -1,3 +1,35 @@
 # Data Source
 
-Add data sources example
+Data sources behave just like resources, except they are intended for infrastructure which already exists. As such, they are not created, updated or destroyed by Terraform, but rather simply referenced. Think of them as read-only.
+
+## Syntax
+
+Data sources are declared similarly to resources, but use the `data` keyword. Like this
+
+```terraform
+data "akamai_group" "my_group" {
+     group_name = "My Group"
+     contract = "1-2AB34C"
+}
+```
+
+Here, we are looking for the `akamai_group` named "My Group", which can be found in the given contract. This is useful as we may wish to use the group ID but only know its name. Referencing data sources is similar to referencing resources, except data source IDs always start with `data`, whereas resources just start with the resource type.
+
+For example:
+
+```
+resource "akamai_property" "example" {
+    group_id    = data.akamai_group.my_group.id
+    ...
+}
+```
+
+Here we cross-reference the id attribute of the group data source, in order to use it in our `akamai_property` resource.
+
+## Exercises
+
+1. Create a Terraform file which contains 3 data sources
+    a. akamai_appsec_configuration, referncing a single config
+    b. akamai_group, referencing a single group
+    c. akamai_property, referencing a single akamai_property
+2. Create outputs with the IDs of each of the three data sources

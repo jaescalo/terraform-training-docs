@@ -1,3 +1,32 @@
 # Providers
 
-Providers
+Providers in Terraform are the translation layer between Terraform code and the API calls needed to actually do anything. Terraform without providers would be of no use, though it does come with various generic providers built-in. More commonly, users would use an external provide to build resources on that platform, e.g. the Akamai provider can be used to build Akamai resources, the AWS provider for AWS, and so on.
+
+Provider code is written in GoLang (as is Terraform itself) and is beyond the scope of this course, but it is useful to know that there is nothing preventing you writing your own provider and adding functionality to Terraform.
+
+Hashicorp, the company behind Terraform, provides a gallery of Providers, which you can reference in your code, and Terraform will be able to download directly. You can also configure custom providers elsewhere (on an internal repository, for example) which your code can reference.
+
+## Using a provider
+
+In your Terraform code (any .tf file in your code directory), before you can use a provider you have to initialize it. This tells Terraform you want to use a given provider with a set of options, and when `terraform init` is run, Terraform will go out and find your provider's compiled code, and download it to your directory. For example:
+
+```terraform
+terraform {
+  required_providers {
+    akamai = {
+      source  = "akamai/akamai"
+      version = ">= 6.1.0"
+    }
+  }
+  required_version = ">= 1.8"
+}
+
+provider "akamai" {
+  edgerc         = var.edgerc_path
+  config_section = var.config_section
+}
+```
+
+The first block of code is where you define the requirements for Terraform, which is used in `terraform init`. Here, we state that we need the provider `akamai` from the org `akamai`, and at least version 6.1.0. If there is a newer version Terraform will install it, but only during `init`. It will not be updated each time. You can also specify a maximum version, or an exact version, or even state that any minor updates beyond v6 are fine, but not major ones. This is useful when working collaboratively, as new provider versions could change how your code works, or which options it supports.
+
+The second section of code (`provider "akamai"`) configured the Akamai provider. This is dynamic and is evaluated when running `plan`, `apply`, `delete` etc. and informs Terraform how to use the provider. In our case you provide the authentication options, but there are additional options in most providers (such as request_limit) which you can use here.
