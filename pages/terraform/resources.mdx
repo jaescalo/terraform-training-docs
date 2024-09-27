@@ -1,3 +1,70 @@
 # Resources
 
-Add resource example
+Resources are the most important element in Terraform, and represent all the pieces of infrastructure you are managing within Terraform. Every resource is declared in the format:
+
+```terraform
+resource "resource_type" "resource_instance" {
+    # Config options here
+}
+```
+
+`resource_type` comes from your provider, e.g. `akamai_property`, and can (and likely will) be reused many times. However, `resource_instance` is the name you use for the _instance_ of your resource type and as such must be unique. For example, a pair of property resources might look like this:
+
+```terraform
+resource "akamai_property" "my-property" {
+    name        = "my-property"
+    product_id  = "prd_product"
+    contract_id = "ctr_C-0N7RAC7"
+    group_id    = "grp_12345"
+    rule_format = "v2023-01-05"
+}
+
+resource "akamai_property" "my-other-property" {
+    name        = "my-other-property"
+    product_id  = "prd_product"
+    contract_id = "ctr_C-0N7RAC7"
+    group_id    = "grp_12345"
+    rule_format = "v2023-01-05"
+}
+```
+
+Your terraform files will likely be largely made up of resources, which can be often different types but it is common to have multiple instances of the same type.
+
+## Referencing Resources
+
+When you create a resource in terraform it is common to need to reference some aspect of that resource. This is done in the following format:
+
+```terraform
+<resource type>.<instance label>.<instance attribute>
+```
+
+For example, if you were configuring a property resource and wanted to refer to the name of an edgehostname you had created above, you could do it like this:
+
+```terraform
+resource "akamai_edge_hostname" "ehn" {
+  product_id    = "prd_Fresca"
+  contract_id   = data.akamai_contract.contract.id
+  group_id      = data.akamai_group.group.id
+  ip_behavior   = "IPV4"
+  edge_hostname = "www.example.com.edgesuite.net"
+}
+
+resource "akamai_property" "property" {
+  name        = "property"
+  ...
+  hostnames {
+    cname_from             = "www.example.com"
+    cname_to               = akamai_edge_hostname.ehn.edge_hostname
+    cert_provisioning_type = "CPS_MANAGED"
+  }
+}
+```
+
+Here, we reference our instance of the `akamai_edge_hostname` resource type whose label is `ehn`. Then from that object we use the `edge_hostname` attribute, and as such the whole reference becomes `akamai_edge_hostname.ehn.edge_hostname`
+
+## Exercises
+
+1. Create a terraform file with at least one resource
+2. Create a 2nd resource which refers back to some element of the first, using its address
+
+_Try not to just copy the example above, as that is way too easy :-) Come up with some new use case of your own_

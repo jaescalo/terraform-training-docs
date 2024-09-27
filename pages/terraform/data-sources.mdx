@@ -13,7 +13,15 @@ data "akamai_group" "my_group" {
 }
 ```
 
-Here, we are looking for the `akamai_group` named "My Group", which can be found in the given contract. This is useful as we may wish to use the group ID but only know its name. Referencing data sources is similar to referencing resources, except data source IDs always start with `data`, whereas resources just start with the resource type.
+Here, we are looking for the `akamai_group` named "My Group", which can be found in the given contract. This is useful as we may wish to use the group ID but only know its name. 
+
+# Referencing Data Sources
+
+Referencing data sources is similar to referencing resources, except data source IDs always start with `data`, whereas resources just start with the resource type. The format is as follows:
+
+```terraform
+data.<data source type>.<instance label>.<instance attribute>
+```
 
 For example:
 
@@ -24,7 +32,7 @@ resource "akamai_property" "example" {
 }
 ```
 
-Here we cross-reference the id attribute of the group data source, in order to use it in our `akamai_property` resource.
+Here we cross-reference the `id` attribute of the `my_group` instance of the `akamai_group` data source, in order to use it in our `akamai_property` resource.
 
 ## Exercises
 
