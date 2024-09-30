@@ -1,3 +1,27 @@
 # Outputs
 
-Add stuff here... 
+Outputs are a way to print data to the shell after a Terraform run, or to pass data between modules. They are often used to show values to the user which would otherwise be hidden as part of troubleshooting.
+
+## Syntax
+
+In its simplest form, and output looks like this
+
+```terraform
+output "property id" {
+    value = akamai_property.my_property.id
+}
+```
+
+Here, the value is inferred from a resource (which is the norm), but if you wish the value could simply be a string, or a combination of both.
+
+Outputs can also contain the keywords `description` and `sensitive`. A `description` is purely to help the reader understand the purpose of the output, by `sensitive` can be used to suppress values from the output of `terraform plan` and `terraform apply`.
+
+```terraform
+output "property id" {
+    value = akamai_property.my_property.id
+    description = "The ID of my property"
+    sensitive = true
+}
+```
+
+##
