@@ -17,21 +17,31 @@ Git allows you to track changes in your code over time. Let's start by creating 
 
 ## 2. Setting Up SSH Keys
 
+> Note: If you are a Windows user, make sure to run the commands below in PowerShell, rather the Cmd Prompt. You do not need Runas Administrator unless specified
+
 SSH keys provide a secure way to connect with GitHub:
 
 1. Open your terminal.
 2. Generate a new SSH key:
     ```bash
-    ssh-keygen -t ed25519 -C "your_email@example.com"
+    ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/terraformclub
 3. Start the ssh-agent:
+    _MacOS_
     ```bash
     eval "$(ssh-agent -s)"
+    ```
+    _Windows_
+    - Right-click Start Menu, select "Windows Powershell (Admin)"
+    ```powershell
+    Set-Service -Name ssh-agent -StartupType Automatic
+    Start-Service -Name ssh-agent
+    ```
 4. Add your SSH key to the agent:
     ```bash
-    ssh-add ~/.ssh/id_ed25519
+    ssh-add ~/.ssh/terraformclub
 5. Copy your public key:
     ```bash
-    cat ~/.ssh/id_ed25519.pub
+    cat ~/.ssh/terraformclub.pub
 6. Go to GitHub Settings > SSH and GPG keys > New SSH key.
 7. Paste your key and save.
 
