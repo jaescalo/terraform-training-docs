@@ -64,7 +64,6 @@ Here, we reference our instance of the `akamai_edge_hostname` resource type whos
 
 ## Exercises
 
-1. Create a terraform file with at least one resource
-2. Create a 2nd resource which refers back to some element of the first, using its address
-
-_Try not to just copy the example above, as that is way too easy :-) Come up with some new use case of your own_
+1. Create a terraform file named `security.tf` with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
+2. Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `akamai_appsec_configuration`
+3. Duplicate the two resources above and change the names, in order to create 2 config/policy pairs. 

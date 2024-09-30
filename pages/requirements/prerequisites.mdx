@@ -1,0 +1,68 @@
+# Prerequisites
+
+In order to get the most from this course, you need to install a few small applications on your own system. You _could_ do this all in a Docker container if you so choose, but leaving you with the tools to continue working with Terraform is one of the goals of the course. The requirements differ slightly between MacOS and Windows, but there is no reason you can't work with Terraform in any supported OS.
+
+> Please complete these prerequisites _before_ attending the first session, and post any 
+
+## MacOS
+
+### Homebrew
+
+Homebrew is a package manager for MacOS which is extremely useful in managing installed binaries on your Mac. The initial setup can take some time, and if there are issues they can be tricky to troublshoot, so make sure to run this well in advance of the class.
+
+_Check homebrew is installed already_
+```shell
+where brew
+```
+
+_Install homebrew_
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### Terraform
+
+Terraform is installed a single binary, which you can install by running:
+
+```shell
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+```
+
+## Windows
+
+First off, you _can_ use Windows Services for Linux (Ubuntu/Debian) if you wish, but you _definitely_ don't have to. All of the commands you will need can be run natively in Windows, typically using a PowerShell shell. There are several things you need first, however, which can be installed using `winget`.
+
+> While not required, the Windows Terminal is an excellent application for devops use. If your system does not have it already (it probably does), you can install it by running `winget install 9N0DX20HK701`
+
+### Git
+
+This is tangiential to Terraform itself, but is absolutely essential for modern devops. This install will likely pop up and ask you to accept various options. The defaults here are fine, but feel free to choose alternatives if you wish.
+
+```powershell
+winget install git.git
+```
+
+### Terraform
+
+Terraform is installed a single binary, which you can install by running:
+
+```powershell
+winget install Hashicorp.Terraform
+```
+
+## VS Code
+
+For this course you can really run (modern) code editor you wish, but all of our examples will be in Visual Studio Code. If you wish, you can install this by running
+
+### MacOS
+
+```shell
+brew install --cask visual-studio-code
+```
+
+### Windows
+
+```powershell
+winget install -e --id Microsoft.VisualStudioCode
+```

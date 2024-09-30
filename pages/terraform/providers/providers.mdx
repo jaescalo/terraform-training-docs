@@ -2,13 +2,11 @@
 
 Providers in Terraform are the translation layer between Terraform code and the API calls needed to actually do anything. Terraform without providers would be of no use, though it does come with various generic providers built-in. More commonly, users would use an external provide to build resources on that platform, e.g. the Akamai provider can be used to build Akamai resources, the AWS provider for AWS, and so on.
 
-Provider code is written in GoLang (as is Terraform itself) and is beyond the scope of this course, but it is useful to know that there is nothing preventing you writing your own provider and adding functionality to Terraform.
-
-Hashicorp, the company behind Terraform, provides a gallery of Providers, which you can reference in your code, and Terraform will be able to download directly. You can also configure custom providers elsewhere (on an internal repository, for example) which your code can reference.
+Provider code is written in GoLang (as is Terraform itself) and is beyond the scope of this course, but it is useful to know that there is nothing preventing you writing your own provider and adding functionality to Terraform. Hashicorp, the company behind Terraform, provides a gallery of Providers, which you can reference in your code, and Terraform will be able to download directly. You can also configure custom providers elsewhere (on an internal repository, for example) which your code can reference.
 
 ## Using a provider
 
-In your Terraform code (any .tf file in your code directory), before you can use a provider you have to initialize it. This tells Terraform you want to use a given provider with a set of options, and when `terraform init` is run, Terraform will go out and find your provider's compiled code, and download it to your directory. For example:
+In your Terraform code (any .tf file in your code directory), you must declare which providers (and you can use multiple ones) you need, and which version of each provider you wish to use. This is done in the `required_providers` map within the `terraform` configuration block. Then, if required, you can provide configuration options to that provider in its own `provider` block.
 
 ```terraform
 terraform {
@@ -22,11 +20,27 @@ terraform {
 }
 
 provider "akamai" {
-  edgerc         = var.edgerc_path
-  config_section = var.config_section
+  edgerc         = "~/.edgerc"
+  config_section = "default"
 }
 ```
 
-The first block of code is where you define the requirements for Terraform, which is used in `terraform init`. Here, we state that we need the provider `akamai` from the org `akamai`, and at least version 6.1.0. If there is a newer version Terraform will install it, but only during `init`. It will not be updated each time. You can also specify a maximum version, or an exact version, or even state that any minor updates beyond v6 are fine, but not major ones. This is useful when working collaboratively, as new provider versions could change how your code works, or which options it supports.
+## Required Providers
 
-The second section of code (`provider "akamai"`) configured the Akamai provider. This is dynamic and is evaluated when running `plan`, `apply`, `delete` etc. and informs Terraform how to use the provider. In our case you provide the authentication options, but there are additional options in most providers (such as request_limit) which you can use here.
+In the required_providers block, we state that we need the provider `akamai` from the org `akamai`, and at least version 6.1.0. When you run `terraform init` Terraform will go to the Hashicorp gallery and retrieve the compiled code of the version in question, storing it in the `.terraform` directory where you ran the command. If there is a newer version Terraform will install it, but only during `terraform init`, it will not be updated each time. You can also specify a maximum version, or an exact version, or even state that any minor updates beyond v6 are fine, but not major ones. This is useful when working collaboratively, as new provider versions could change how your code works, or which options it supports.
+
+> [Full info on version constraints are available here](https://developer.hashicorp.com/terraform/language/expressions/version-constraints)
+
+Also in the `terraform` block is the statement `required_version`. Don't be confused with this one, as it is unrelated to the `version` parameter of the `akamai` block above. `required_version` _outside_ the `required_providers` block refers to the required (commonly minimum) version of the terraform binary itself. Hashicorp is constantly updating Terraform, so it is good practice to set this to the version of Terraform you are running at a minimum, but not exact, version. This allows users to use later versions, which are commonly backward compatible.
+
+## Provider Configuration
+
+The following `provider` block configures the Akamai provider. This is dynamic and is evaluated when running `terraform plan`, `terraform apply`, `terraform delete` etc. and informs Terraform how to use the provider. In our case we provide the authentication options, but there are additional options in most providers (such as `request_limit`) which you can use here.
+
+## Exercises
+
+1. Create a file named `provider.tf`. Populate it as the example above
+2. Update the Akamai required version to use the ~> operator, and specify only the Major and Minor versions, e.g. 1.1, rather than 1.1.0. This means that Terraform will install any minor updates when running `init`, but not the next major version.
+3. Update the required_version parameter to the most recently version of Terraform
+
+> Note: Save this file for later. It is useful to copy into any new folder in which you are configuring Terraform
