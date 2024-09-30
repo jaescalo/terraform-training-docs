@@ -16,14 +16,14 @@ variable "my_var" {
 
 In this block, only the `type` element is required, but `description` is highly recommended as it makes life a lot easier for anyone (including yourself) who is reading your code in an attempt to understand how it works. Type can be one of:
 
-- string
-- number
-- bool
-- list(<TYPE>)
-- set(<TYPE>)
-- map(<TYPE>)
-- object({<ATTR NAME> = <TYPE>, ... })
-- tuple([<TYPE>, ...])
+- `string`
+- `number`
+- `bool`
+- `list(<TYPE>)`
+- `set(<TYPE>)`
+- `map(<TYPE>)`
+- `object({<ATTR NAME> = <TYPE>, ... })`
+- `tuple([<TYPE>, ...])`
 
 The `default` element gives your variable a default value, should no value be provided for it by some other means (see below). This attribute is optional, but providing it then makes the variable itself optional, as all variables are required to have a value. If a variable has no default value, then one must be provided to it at runtime.
 
