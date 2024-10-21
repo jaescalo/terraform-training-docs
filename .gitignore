@@ -4,3 +4,5 @@ extra
 
 .DS_Store
 terraform_code
+
+tests/

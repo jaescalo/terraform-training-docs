@@ -6,7 +6,7 @@ Before we dive into Terraform, let's ensure you're comfortable with Git. This ve
 
 Git allows you to track changes in your code over time. Let's start by creating a new repository:
 
-1. Navigate to [GitHub](https://github.com) and log in.
+1. Navigate to [GitHub](https://github.com) and log in or create a new account if you don't have one. 
 2. Click the '+' icon in the top-right corner and select 'New repository'.
 3. Name your repository (e.g., 'terraform-training').
 4. Choose 'Public' or 'Private' visibility.
@@ -17,7 +17,7 @@ Git allows you to track changes in your code over time. Let's start by creating 
 
 ## 2. Setting Up SSH Keys
 
-> Note: If you are a Windows user, make sure to run the commands below in PowerShell, rather the Cmd Prompt. You do not need Runas Administrator unless specified
+> Note: If you are a Windows user, make sure to run the commands below in PowerShell, rather the Cmd Prompt. You do not need "Run as Administrator" unless specified
 
 SSH keys provide a secure way to connect with GitHub:
 
@@ -25,12 +25,35 @@ SSH keys provide a secure way to connect with GitHub:
 2. Generate a new SSH key:
     ```bash
     ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/terraformclub
-3. Start the ssh-agent:
-    _MacOS_
+    ```
+    At the "Enter passphrase" prompt you can leave it empty for no passphase.
+3. Add the keys to the ssh-agent:
+
+    ### _MacOS_
+    - Start the ssh-agent:
     ```bash
     eval "$(ssh-agent -s)"
     ```
-    _Windows_
+
+    - Check to see if your ~/.ssh/config file exists in the default location.
+    ```bash
+    open ~/.ssh/config
+    ```
+    If the file doesn't exist, create the file.
+    ```bash
+    touch ~/.ssh/config
+    ```
+
+    - Open your `~/.ssh/config` file, then modify the file to contain the following lines. 
+
+    ```text
+    Host github.com
+        AddKeysToAgent yes
+        UseKeychain yes
+        IdentityFile ~/.ssh/terraformclub
+    ```
+
+    ### _Windows_
     - Right-click Start Menu, select "Windows Powershell (Admin)"
     ```powershell
     Set-Service -Name ssh-agent -StartupType Automatic
@@ -46,7 +69,7 @@ SSH keys provide a secure way to connect with GitHub:
 7. Paste your key and save.
 
 ## 3. Cloning Your Repository
-Now, let's get your repository on your local machine:
+Now, let's get your repository on your local machine. Assuming your repository name is `terraform-training`:
 ```bash
 git clone git@github.com:yourusername/terraform-training.git
 cd terraform-training
