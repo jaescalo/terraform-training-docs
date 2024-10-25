@@ -32,6 +32,8 @@ All of these are required to authenticate your API requests to Akamai.
 
 ## Using Akamai Credentials with Terraform
 
+When you're working with more than one account, move between them using an account switch key with an API client enabled to manage multiple accounts. If you're not working with more than one account disregard the `AKAMAI_ACCOUNT_KEY` and `account_key` below.
+
 To use these credentials with Terraform, you can set them as environment variables:
 
 ```bash
@@ -39,6 +41,7 @@ export AKAMAI_CLIENT_SECRET="your_client_secret"
 export AKAMAI_HOST="your_base_url"
 export AKAMAI_ACCESS_TOKEN="your_access_token"
 export AKAMAI_CLIENT_TOKEN="your_client_token"
+export AKAMAI_ACCOUNT_KEY="your_account_id"
 ```
 
 Alternatively, you can use an `.edgerc` file, which is a common way to store Akamai credentials:
@@ -46,12 +49,13 @@ Alternatively, you can use an `.edgerc` file, which is a common way to store Aka
 1. Create a file named `.edgerc` in your home directory.
 2. Add the following content:
 
-```
+```text filename=".edgerc" copy
 [default]
 client_secret = your_client_secret
 host = your_base_url
 access_token = your_access_token
 client_token = your_client_token
+account_key = you_account_id
 ```
 The `.edgerc` method will be used for the examples and exercises in this course.
 

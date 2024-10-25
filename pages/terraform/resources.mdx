@@ -2,7 +2,7 @@
 
 Resources are the most important element in Terraform, and represent all the pieces of infrastructure you are managing within Terraform. Every resource is declared in the format:
 
-```terraform
+```hcl
 resource "resource_type" "resource_instance" {
     # Config options here
 }
@@ -10,7 +10,7 @@ resource "resource_type" "resource_instance" {
 
 `resource_type` comes from your provider, e.g. `akamai_property`, and can (and likely will) be reused many times. However, `resource_instance` is the name you use for the _instance_ of your resource type and as such must be unique. For example, a pair of property resources might look like this:
 
-```terraform
+```hcl {1,9}
 resource "akamai_property" "my-property" {
     name        = "my-property"
     product_id  = "prd_product"
@@ -34,13 +34,13 @@ Your terraform files will likely be largely made up of resources, which can be o
 
 When you create a resource in terraform it is common to need to reference some aspect of that resource. This is done in the following format:
 
-```terraform
+```hcl
 <resource type>.<instance label>.<instance attribute>
 ```
 
 For example, if you were configuring a property resource and wanted to refer to the name of an edgehostname you had created above, you could do it like this:
 
-```terraform
+```hcl {14}
 resource "akamai_edge_hostname" "ehn" {
   product_id    = "prd_Fresca"
   contract_id   = data.akamai_contract.contract.id
@@ -64,6 +64,8 @@ Here, we reference our instance of the `akamai_edge_hostname` resource type whos
 
 ## Exercises
 
-1. Create a terraform file named `security.tf` with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
+1. Create a terraform file named security.tf with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
 2. Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `akamai_appsec_configuration`
 3. Duplicate the two resources above and change the names, in order to create 2 config/policy pairs. 
+4. Run a `terraform apply`
+5. Commit your changes and push them to GitHub. 

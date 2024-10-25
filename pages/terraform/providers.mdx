@@ -8,7 +8,7 @@ Provider code is written in GoLang (as is Terraform itself) and is beyond the sc
 
 In your Terraform code (any .tf file in your code directory), you must declare which providers (and you can use multiple ones) you need, and which version of each provider you wish to use. This is done in the `required_providers` map within the `terraform` configuration block. Then, if required, you can provide configuration options to that provider in its own `provider` block.
 
-```terraform
+```hcl filename="provider.tf" copy
 terraform {
   required_providers {
     akamai = {
@@ -27,7 +27,7 @@ provider "akamai" {
 
 ## Required Providers
 
-In the required_providers block, we state that we need the provider `akamai` from the org `akamai`, and at least version 6.1.0. When you run `terraform init` Terraform will go to the Hashicorp gallery and retrieve the compiled code of the version in question, storing it in the `.terraform` directory where you ran the command. If there is a newer version Terraform will install it, but only during `terraform init`, it will not be updated each time. You can also specify a maximum version, or an exact version, or even state that any minor updates beyond v6 are fine, but not major ones. This is useful when working collaboratively, as new provider versions could change how your code works, or which options it supports.
+In the required_providers block, we state that we need the provider `akamai` from the org `akamai`, and at least version 6.4.0. When you run `terraform init` Terraform will go to the Hashicorp gallery and retrieve the compiled code of the version in question, storing it in the `.terraform` directory where you ran the command. If there is a newer version Terraform will install it, but only during `terraform init`, it will not be updated each time. You can also specify a maximum version, or an exact version, or even state that any minor updates beyond v6 are fine, but not major ones. This is useful when working collaboratively, as new provider versions could change how your code works, or which options it supports.
 
 > [Full info on version constraints are available here](https://developer.hashicorp.com/terraform/language/expressions/version-constraints)
 
@@ -37,10 +37,18 @@ Also in the `terraform` block is the statement `required_version`. Don't be conf
 
 The following `provider` block configures the Akamai provider. This is dynamic and is evaluated when running `terraform plan`, `terraform apply`, `terraform delete` etc. and informs Terraform how to use the provider. In our case we provide the authentication options, but there are additional options in most providers (such as `request_limit`) which you can use here.
 
+## Best Practices
+
+1. **Use Variables for Sensitive Information**: Never hardcode API tokens or other sensitive data directly in your provider blocks. Use variables instead.
+
+2. **Version Constraints**: Always specify version constraints for your providers to ensure reproducibility.
+
+3. **Minimize Provider Block Usage**: Try to define your provider configuration in one place and use it throughout your project.
+
 ## Exercises
 
-1. Create a file named `provider.tf`. Populate it as the example above
-2. Update the Akamai required version to use the ~> operator, and specify only the Major and Minor versions, e.g. 1.1, rather than 1.1.0. This means that Terraform will install any minor updates when running `init`, but not the next major version.
-3. Update the required_version parameter to the most recently version of Terraform
-
-> Note: Save this file for later. It is useful to copy into any new folder in which you are configuring Terraform
+1. Create a file named provider.tf in your local clone of your GitHub repository. Populate it as the example above.
+2. Update the Akamai required version to use the `~>` operator, and specify only the Major and Minor versions, e.g. 1.1, rather than 1.1.0. This means that Terraform will install any minor updates when running `init`, but not the next major version.
+3. Update the `required_version` parameter to the most recently version of Terraform
+4. Run `terraform init`. Which version was installed?
+5. Commit your change and push it to GitHub. 

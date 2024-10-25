@@ -6,7 +6,7 @@ Outputs are a way to print data to the shell after a Terraform run, or to pass d
 
 In its simplest form, and output looks like this
 
-```terraform
+```hcl
 output "property id" {
     value = akamai_property.my_property.id
 }
@@ -16,7 +16,7 @@ Here, the value is inferred from a resource (which is the norm), but if you wish
 
 Outputs can also contain the keywords `description` and `sensitive`. A `description` is purely to help the reader understand the purpose of the output, by `sensitive` can be used to suppress values from the output of `terraform plan` and `terraform apply`.
 
-```terraform
+```hcl
 output "property id" {
     value = akamai_property.my_property.id
     description = "The ID of my property"
@@ -26,5 +26,5 @@ output "property id" {
 
 ## Exercises
 
-1. Create a terraform file called `outputs.tf`
+1. Create a terraform file called outputs.tf
 2. Create at least 2 outputs taken from resources or data sources you have configured in other files

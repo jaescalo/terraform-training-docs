@@ -6,7 +6,7 @@ Variables in Terraform are essential for any kind of agile coding, as they allow
 
 Before they can be used, Terraform variables must be declared, which is a programming term for announcing a variable and telling Terraform some information about it, without actually giving it a value. This is done like this:
 
-```terraform
+```hcl filename="variables.tf" copy
 variable "my_var" {
   type        = string
   description = "This is my variable"
@@ -45,7 +45,7 @@ The `-var` parameter of `terraform plan` can be repeated as often as is required
 
 An alternative to setting variables at runtime is the use of *tfvars files*. tfvars files are simple text files which contain variables and their values in the form of key=value pairs. Variables referenced in tfvars files must already be declared elsewhere in your tf files, but tfvars files allows you to specify values only, keeping all variable assignments together such that your code can be reused. For example, you might create a tfvars file which looks like this:
 
-```text
+```text filename="terraform.tfvars" copy
 contract_id=1-2AB34C
 group_id=123456
 property_name=my_property
@@ -53,7 +53,7 @@ property_name=my_property
 
 This would require variables (commonly in `variables.tf`) to be declared with the same names, like this:
 
-```terraform
+```hcl filename="variables.tf" copy
 variable "contract_id" {
   type        = string
   description = "Contract ID"
@@ -82,7 +82,7 @@ Finally, the whole reason to declare and set variables is to use them, which you
 
 For example, using the variables above you could create an `akamai_property` resource like this:
 
-```terraform
+```hcl filename="main.tf" copy {2,4,5}
 resource "akamai_property" "my_property" {
     name        = var.property_name
     product_id  = "Fresca"
@@ -91,12 +91,27 @@ resource "akamai_property" "my_property" {
 }
 ```
 
+## Validations
+Although not necessary, you can validate the values used for variables. Especially handy if a different team may be creating *.tfvars files. For example you are declaring a variable for the environment, and your infrastructure only has 4 valid environments (dev, qa, int, prod):
+
+```hcl filename="variables.tf" copy {4}
+variable "env" {
+  type    = string
+  default = "dev"
+  validation {
+    condition = can(index(["dev", "qa", "int", "prod"], var.env))
+    error_message = "Invalid value for env. Allowed values are dev, int, qa, prod."
+  }
+}
+```
+
 ## Exercises
 
 1. Create a variables.tf file which declares the variables `edgerc_path` and `config_section`, both of type `string`. Configure these with descriptions and default values
-2. Update your `provider.tf` file to use these variables in the `provider "akamai"` block
+2. Update your provider.tf file to use these variables in the `provider "akamai"` block
 3. Run `terraform init` and confirm the provider is installed correctly
 4. Run `terraform plan`, providing new values for the 2 variables using the `-var` syntax
-4. Create a `terraform.tfvars` file and use it to set new values for both variables. Re-run `terraform plan` using this file instead.
+5. Create a terraform.tfvars file and use it to set new values for both variables. Re-run `terraform plan` using this file instead.
+4. Commit your changes and push them to GitHub. 
 
-> Hint: If you use `terraform.tfvars` you don't need to tell Terraform the variable file's name. If you use anything else (.tfvars) you must use `-var-file`
+> Hint: If you use terraform.tfvars you don't need to tell Terraform the variable file's name. If you use anything else (.tfvars) you must use `-var-file`

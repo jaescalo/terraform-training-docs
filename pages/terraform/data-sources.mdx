@@ -4,12 +4,12 @@ Data sources behave just like resources, except they are intended for infrastruc
 
 ## Syntax
 
-Data sources are declared similarly to resources, but use the `data` keyword. Like this
+Data sources are declared similarly to resources, but use the `data` keyword. Like this:
 
-```terraform
+```hcl filename="main.tf" copy
 data "akamai_group" "my_group" {
-     group_name = "My Group"
-     contract   = "1-2AB34C"
+     group_name   = "My Group"
+     contract_id  = "1-2AB34C"
 }
 ```
 
@@ -19,25 +19,26 @@ Here, we are looking for the `akamai_group` named "My Group", which can be found
 
 Referencing data sources is similar to referencing resources, except data source IDs always start with `data`, whereas resources just start with the resource type. The format is as follows:
 
-```terraform
+```hcl
 data.<data source type>.<instance label>.<instance attribute>
 ```
 
 For example:
 
-```
+```hcl {2}
 resource "akamai_property" "example" {
     group_id    = data.akamai_group.my_group.id
     ...
 }
 ```
 
-Here we cross-reference the `id` attribute of the `my_group` instance of the `akamai_group` data source, in order to use it in our `akamai_property` resource.
+Here we cross-reference the `id` attribute of the `my_group` instance of the `akamai_group` data source, in order to use it in our `akamai_property` resource. References can be used in different types of Terraform blocks such as [modules](/terraform/modules) and [outputs](/terraform/outputs).
 
 ## Exercises
-
-1. Create a Terraform file which contains 3 data sources
-    a. akamai_appsec_configuration, referncing a single config
+1. Create a Terraform file named main.tf which contains 3 data sources
+    a. akamai_appsec_configuration, referencing a single config
     b. akamai_group, referencing a single group
     c. akamai_property, referencing a single akamai_property
-2. Create outputs with the IDs of each of the three data sources
+2. Create [outputs](/terraform/outputs) with the IDs of each of the three data sources
+3. Run a `terraform apply`
+4. Commit your changes and push them to GitHub. 

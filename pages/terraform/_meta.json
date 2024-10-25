@@ -14,14 +14,11 @@
   "resources": {
     "title": "Resources"
   },
-  "variables": {
-    "title": "Variables"
-  },
-  "locals": {
-    "title": "Locals"
-  },
   "outputs": {
     "title": "Outputs"
+  },
+  "variables": {
+    "title": "Variables"
   },
   "expressions": {
     "title": "Expressions"
@@ -43,5 +40,5 @@
   },
   "troubleshooting": {
     "title": "Troubleshooting"
-  } 
+  }
 }

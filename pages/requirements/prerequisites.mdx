@@ -2,8 +2,6 @@
 
 In order to get the most from this course, you need to install a few small applications on your own system. You _could_ do this all in a Docker container if you so choose, but leaving you with the tools to continue working with Terraform is one of the goals of the course. The requirements differ slightly between MacOS and Windows, but there is no reason you can't work with Terraform in any supported OS.
 
-> Please complete these prerequisites _before_ attending the first session, and post any 
-
 ## MacOS
 
 ### Homebrew
@@ -11,12 +9,12 @@ In order to get the most from this course, you need to install a few small appli
 Homebrew is a package manager for MacOS which is extremely useful in managing installed binaries on your Mac. The initial setup can take some time, and if there are issues they can be tricky to troublshoot, so make sure to run this well in advance of the class.
 
 _Check homebrew is installed already_
-```shell
+```shell copy
 where brew
 ```
 
 _Install homebrew_
-```shell
+```shell copy
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
@@ -24,7 +22,7 @@ _Install homebrew_
 
 Terraform is installed a single binary, which you can install by running:
 
-```shell
+```shell copy
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 ```
@@ -39,7 +37,7 @@ First off, you _can_ use Windows Services for Linux (Ubuntu/Debian) if you wish,
 
 This is tangiential to Terraform itself, but is absolutely essential for modern devops. This install will likely pop up and ask you to accept various options. The defaults here are fine, but feel free to choose alternatives if you wish.
 
-```powershell
+```powershell copy
 winget install git.git
 ```
 
@@ -47,22 +45,22 @@ winget install git.git
 
 Terraform is installed a single binary, which you can install by running:
 
-```powershell
+```powershell copy
 winget install Hashicorp.Terraform
 ```
 
 ## VS Code
 
-For this course you can really run (modern) code editor you wish, but all of our examples will be in Visual Studio Code. If you wish, you can install this by running
+For this course you can really run (modern) code editor you wish, but all of our examples will be in Visual Studio Code. If you wish, you can install this by running:
 
 ### MacOS
 
-```shell
+```shell copy
 brew install --cask visual-studio-code
 ```
 
 ### Windows
 
-```powershell
+```powershell copy
 winget install -e --id Microsoft.VisualStudioCode
 ```

@@ -1,0 +1,32 @@
+# Terraform Environment Variables
+
+Environment variables are set at the OS or platform level and made available to the Terraform runtime. These are not necessary, however they allow you to customize certain Terraform behaviors. For example the `TF_LOG` environment variable enables detailed logs to appear on stderr which is useful for debugging. For example:
+```shell copy
+export TF_LOG=trace
+```
+To disable, either unset it, or set it to off. For example:
+```shell copy
+export TF_LOG=off
+```
+
+Another very helpful Terraform environment variable is `TF_VAR_name`. This environment variable can be used to set variables in Terraform where the `name` suffix is replaced with the name of your Terraform variable. For example:
+```shell copy
+export TF_VAR_environment=prod
+```
+The variable must be defined in Terraform for this to work, and a default value can be set as a fail safe in case the variable is not set as an environment variable: 
+```hcl filename="variables.tf" copy {1,4}
+variable "environment" {
+  type        = string
+  description = "Contract ID"
+  default     = "dev"
+}
+```
+Different platforms and different providers will provide their own environment variables which can be found in their documentation. 
+
+For instance the [environment variables for the Akamai Provider](https://techdocs.akamai.com/terraform/docs/environment-variables). 
+
+
+A very common use of environment variables is to set the API credentials. 
+
+
+## Exercises

@@ -11,6 +11,7 @@ Git allows you to track changes in your code over time. Let's start by creating 
 3. Name your repository (e.g., 'terraform-training').
 4. Choose 'Public' or 'Private' visibility.
 5. Check 'Add a README file'.
+6. Under Add .gitignore select Terraform
 6. Click 'Create repository'.
 
 ![Creating a new GitHub repository](images/requirements-git-new-repo.webp)
@@ -23,54 +24,54 @@ SSH keys provide a secure way to connect with GitHub:
 
 1. Open your terminal.
 2. Generate a new SSH key:
-    ```bash
+    ```bash copy
     ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/terraformclub
     ```
     At the "Enter passphrase" prompt you can leave it empty for no passphase.
 3. Add the keys to the ssh-agent:
 
-    ### _MacOS_
+    **_MacOS_**
     - Start the ssh-agent:
-    ```bash
+    ```bash copy
     eval "$(ssh-agent -s)"
     ```
 
     - Check to see if your ~/.ssh/config file exists in the default location.
-    ```bash
+    ```bash copy
     open ~/.ssh/config
     ```
     If the file doesn't exist, create the file.
-    ```bash
+    ```bash copy
     touch ~/.ssh/config
     ```
 
     - Open your `~/.ssh/config` file, then modify the file to contain the following lines. 
 
-    ```text
+    ```text filename="config" copy
     Host github.com
         AddKeysToAgent yes
         UseKeychain yes
         IdentityFile ~/.ssh/terraformclub
     ```
 
-    ### _Windows_
+    **_Windows_**
     - Right-click Start Menu, select "Windows Powershell (Admin)"
-    ```powershell
+    ```powershell copy
     Set-Service -Name ssh-agent -StartupType Automatic
     Start-Service -Name ssh-agent
     ```
 4. Add your SSH key to the agent:
-    ```bash
+    ```bash copy
     ssh-add ~/.ssh/terraformclub
 5. Copy your public key:
-    ```bash
+    ```bash copy
     cat ~/.ssh/terraformclub.pub
 6. Go to GitHub Settings > SSH and GPG keys > New SSH key.
 7. Paste your key and save.
 
 ## 3. Cloning Your Repository
 Now, let's get your repository on your local machine. Assuming your repository name is `terraform-training`:
-```bash
+```bash copy
 git clone git@github.com:yourusername/terraform-training.git
 cd terraform-training
 ```
@@ -80,17 +81,17 @@ As you work on your Terraform configurations, you'll need to commit your changes
 
 1. Make some changes to your files.
 2. Stage your changes:
-    ```bash
+    ```bash copy
     git add .
 3. Commit your changes:
-    ```bash
+    ```bash copy
     git commit -m "Add initial Terraform configuration"
 
 > 💡 **Tip:** Write clear, concise commit messages to document your work effectively.
 
 ## 5. Pushing Your Changes
 Finally, let's push your local commits to GitHub:
-```bash
+```bash copy
 git push origin main
 ```
 

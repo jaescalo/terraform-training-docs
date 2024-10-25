@@ -20,7 +20,7 @@ my_sandwich = make_sandwich(["ham", "cheese"])
 
 In this context you need to walk through the making of your sandwich step by step, as the language itself has no concept of how to do it. In a declarative language, on the other hand, a provider tells the language how to do the making of your sandwich, and all you need to do is provide the options. Like this:
 
-```terraform
+```hcl
 resource "sandwich" "my_sandwich" {
     ingredients = [
         "ham",

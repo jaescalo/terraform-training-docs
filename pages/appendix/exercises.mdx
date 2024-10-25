@@ -1,0 +1,44 @@
+# All Exercises
+
+## Providers
+1. Create a file named provider.tf in your local clone of your GitHub repository. Populate it as the example above.
+2. Update the Akamai required version to use the `~>` operator, and specify only the Major and Minor versions, e.g. 1.1, rather than 1.1.0. This means that Terraform will install any minor updates when running `init`, but not the next major version.
+3. Update the `required_version` parameter to the most recently version of Terraform
+4. Run `terraform init`. Which version was installed?
+5. Commit your change and push it to GitHub. 
+
+## Data Sources
+1. Create a Terraform file named main.tf which contains 3 data sources
+    a. akamai_appsec_configuration, referencing a single config
+    b. akamai_group, referencing a single group
+    c. akamai_property, referencing a single akamai_property
+2. Create [outputs](/terraform/outputs) with the IDs of each of the three data sources
+3. Run a `terraform apply`
+4. Commit your changes and push them to GitHub. 
+
+## Resources
+1. Create a terraform file named security.tf with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
+2. Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `akamai_appsec_configuration`
+3. Duplicate the two resources above and change the names, in order to create 2 config/policy pairs. 
+4. Run a `terraform apply`
+5. Commit your changes and push them to GitHub. 
+
+## Outputs
+1. Create a terraform file called outputs.tf
+2. Create at least 2 outputs taken from resources or data sources you have configured in other files
+
+## Variables
+1. Create a variables.tf file which declares the variables `edgerc_path` and `config_section`, both of type `string`. Configure these with descriptions and default values
+2. Update your provider.tf file to use these variables in the `provider "akamai"` block
+3. Run `terraform init` and confirm the provider is installed correctly
+4. Run `terraform plan`, providing new values for the 2 variables using the `-var` syntax
+5. Create a terraform.tfvars file and use it to set new values for both variables. Re-run `terraform plan` using this file instead.
+4. Commit your changes and push them to GitHub. 
+
+> Hint: If you use terraform.tfvars you don't need to tell Terraform the variable file's name. If you use anything else (.tfvars) you must use `-var-file`
+
+## Locals
+1. In your main.tf create a local named `notes` which could be used in different resources (e.g. `akamai_appsec_activations`, `akamai_property`).
+2. The `notes` local must be the group ID joined with any text you come up with.
+3. Run terraform.
+4. Commit your change and push it to GitHub. 

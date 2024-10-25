@@ -1,4 +1,7 @@
 {
+  "prerequisites": {
+    "title": "Prerequisites"
+  },
   "git": {
     "title": "Git"
   },

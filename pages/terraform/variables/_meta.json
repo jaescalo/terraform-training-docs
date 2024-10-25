@@ -1,0 +1,11 @@
+{
+  "variables": {
+    "title": "Variables"
+  },
+  "locals": {
+    "title": "Locals"
+  },
+  "env-variables": {
+    "title": "Environment Variables"
+  }
+}
