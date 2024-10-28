@@ -77,9 +77,9 @@ terraform plan -var-file my_vars.tfvars
 ## Evaluation
 
 Finally, the whole reason to declare and set variables is to use them, which you can in pretty much any field within Terraform. The syntax is:
-
-`var.<variable name>`
-
+```hcl
+var.<variable name>
+```
 For example, using the variables above you could create an `akamai_property` resource like this:
 
 ```hcl filename="main.tf" copy {2,4,5}

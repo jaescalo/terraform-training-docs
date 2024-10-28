@@ -1,3 +1,126 @@
 # References to Values
 
-References to values
+Terraform makes several kinds of named values available. Each of these names is an expression that references the associated value. You can use them as standalone expressions, or combine them with other expressions to compute new values. For a comprehensive list and details of all the expressions [check here](https://developer.hashicorp.com/terraform/language/expressions/references).
+
+## Data Sources
+Use the `data` keyword and the format is as follows:
+```hcl
+data.<data source type>.<instance label>.<instance attribute>
+```
+
+For example:
+
+```hcl filename="main.tf" copy {7}
+data "akamai_group" "my_group" {
+     group_name   = "My Group"
+     contract_id  = "1-2AB34C"
+}
+
+resource "akamai_property" "example" {
+    group_id    = data.akamai_group.my_group.id
+    ...
+}
+```
+
+## Resources
+Referencing resources is similar to referencing data sources, except there is no `data` keyword. The format is as follows:
+```hcl
+<resource type>.<instance label>.<instance attribute>
+```
+For example:
+
+```hcl filename="main.tf" copy {14}
+resource "akamai_edge_hostname" "ehn" {
+  product_id    = "prd_Fresca"
+  contract_id   = data.akamai_contract.contract.id
+  group_id      = data.akamai_group.group.id
+  ip_behavior   = "IPV4"
+  edge_hostname = "www.example.com.edgesuite.net"
+}
+
+resource "akamai_property" "property" {
+  name        = "property"
+  ...
+  hostnames {
+    cname_from             = "www.example.com"
+    cname_to               = akamai_edge_hostname.ehn.edge_hostname
+    cert_provisioning_type = "CPS_MANAGED"
+  }
+}
+```
+
+## Variables
+The syntax is:
+```hcl
+var.<variable name>
+```
+For example, using the variables below:
+```hcl filename="variables.tf" copy
+variable "contract_id" {
+  type        = string
+  description = "Contract ID"
+}
+variable "group_id" {
+  type        = string
+  description = "Group ID"
+}
+variable "property_name" {
+  type        = string
+  description = "Name for the property to be managed"
+}
+```
+You could create an `akamai_property` resource like this:
+
+```hcl filename="main.tf" copy {2,4,5}
+resource "akamai_property" "my_property" {
+    name        = var.property_name
+    product_id  = "Fresca"
+    contract_id = var.contract_id
+    group_id    = var.groupid
+}
+```
+
+## Locals
+The syntax is:
+```hcl
+local.<variable name>
+```
+Following the same exampe from above we can use locals instead of variables.
+```hcl filename="main.tf" copy {8,10,11}
+locals {
+  contract_id = "Contract ID"
+  group_id = "Group ID"
+  property_name = "Name for the property to be managed"
+}
+
+resource "akamai_property" "my_property" {
+    name        = local.property_name
+    product_id  = "Fresca"
+    contract_id = local.contract_id
+    group_id    = local.groupid
+}
+```
+
+## Child Module Outputs
+We will review Terraform modules later on, however for now the syntax to create a reference from a module output is:
+
+The syntax is:
+```hcl
+module.<module name>.<output name>
+```
+For example, if you have a module that builds a property's rule tree and outputs the rule format the rules: 
+
+```hcl filename="main.tf" copy {10,11}
+module "rule_tree" {
+  source          = "./modules/rules"
+  origin_hostname = var.my_origin_hostname
+  cp_code         = var.my_cp_code
+}
+
+resource "akamai_property" "my_property" {
+  name        = var.property_name
+  ...
+  rule_format   = module.rule_tree.rule_format
+  rules         = module.rule_tree.rules
+}
+```

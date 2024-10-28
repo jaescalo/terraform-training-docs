@@ -40,7 +40,7 @@ When you create a resource in terraform it is common to need to reference some a
 
 For example, if you were configuring a property resource and wanted to refer to the name of an edgehostname you had created above, you could do it like this:
 
-```hcl {14}
+```hcl filename="main.tf" copy {14}
 resource "akamai_edge_hostname" "ehn" {
   product_id    = "prd_Fresca"
   contract_id   = data.akamai_contract.contract.id
