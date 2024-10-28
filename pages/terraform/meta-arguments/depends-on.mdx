@@ -1,3 +1,35 @@
-# depends_on
+# The depends_on Meta-Argument
 
-depends_on
+Use the `depends_on` meta-argument to handle hidden resource or module dependencies that Terraform cannot automatically infer. You only need to explicitly specify a dependency when a resource or module relies on another resource's behavior but does not access any of that resource's data in its arguments.
+
+A good example of this is in an Application Security configuration exported with the [cli-terraform](https://github.com/akamai/cli-terraform).
+
+The `security` module (we'll soon talk about modules) acts as a container for all security-related configurations.
+When you activate a security configuration, you want to ensure ALL security controls are properly configured first. In other words nothing in activate-security will proceed until the entire security module is complete
+
+
+```hcl filename="main.tf" copy {17,18,19}
+module "security" {
+    source      = "./modules/security"
+    hostnames   = var.hostnames
+    name        = var.name
+    description = var.description
+    contract_id = var.contract_id
+    group_name  = var.group_name
+}
+
+module "activate-security" {
+    source              = "./modules/activate-security"
+    name                = var.name
+    config_id           = module.security.config_id
+    network             = var.network
+    notification_emails = var.emails
+    note                = var.activation_note
+    depends_on          = [ 
+        module.security 
+    ]
+}
+```
+
+## Exercises
+Coming Soon...
