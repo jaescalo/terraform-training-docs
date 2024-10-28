@@ -2,6 +2,18 @@
 
 The core Terraform workflow consists of four main steps after you have written your Terraform configuration:
 
+```mermaid
+stateDiagram-v2
+    direction LR
+    classDef Rose stroke-width:1px,stroke-dasharray:none,stroke:#FF5978,fill:#FFDFE5,color:#8E2236;
+    [*] --> Init
+    Init --> Plan
+    Plan --> Apply
+    Apply --> Destroy
+    Destroy --> [*]
+    class Destroy Rose
+```
+
 | Command         | Description                                                                                                                                                                                      |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 1. `init`       | Initialize prepares your project so Terraform can apply your configuration. When you initialize, Terraform configures the backend, installs all providers and modules referred to in your configuration, and creates a version lock file if one doesn't already exist.                                                    |
