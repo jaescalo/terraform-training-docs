@@ -1,3 +1,31 @@
 # count
 
 count
+
+
+
+# Get the property IDs
+data "akamai_property" "properties" {
+    count = length(var.properties)
+    name = var.properties[count.index]
+}
+
+locals {
+  # Remove the grp_ prefix from the group id
+  group_id = parseint(replace(data.akamai_contract.contract.group_id, "grp_", ""), 10)
+  # Remove the prp_ prefix from all properties
+  property_ids = [for item in data.akamai_property.properties[*].id : replace(item, "prp_", "")]
+}
+
+
+
+resource "akamai_dns_record" "tf_demo_dns_hostnames" {
+
+  count = length(var.dns_hostnames)
+
+  zone       = var.dns_zone
+  recordtype = "CNAME"
+  ttl        = 60
+  target     = [var.edge_hostname]
+  name       = var.dns_hostnames[count.index]
+}
