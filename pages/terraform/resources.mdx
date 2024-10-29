@@ -2,13 +2,15 @@
 
 Resources are the most important element in Terraform, and represent all the pieces of infrastructure you are managing within Terraform. Every resource is declared in the format:
 
+## Syntax
+
 ```hcl
 resource "resource_type" "resource_instance" {
     # Config options here
 }
 ```
 
-`resource_type` comes from your provider, e.g. `akamai_property`, and can (and likely will) be reused many times. However, `resource_instance` is the name you use for the _instance_ of your resource type and as such must be unique. For example, a pair of property resources might look like this:
+`resource_type` comes from your provider, e.g. `akamai_property`, and can (and likely will) be reused many times. However, `resource_instance` is the name or label you use for the _instance_ of your resource type and as such must be unique. For example, a pair of property resources might look like this:
 
 ```hcl {1,9}
 resource "akamai_property" "my-property" {
@@ -35,7 +37,7 @@ Your terraform files will likely be largely made up of resources, which can be o
 When you create a resource in terraform it is common to need to reference some aspect of that resource. This is done in the following format:
 
 ```hcl
-<resource type>.<instance label>.<instance attribute>
+<resource type>.<resource instance>.<instance attribute>
 ```
 
 For example, if you were configuring a property resource and wanted to refer to the name of an edgehostname you had created above, you could do it like this:
@@ -63,7 +65,6 @@ resource "akamai_property" "property" {
 Here, we reference our instance of the `akamai_edge_hostname` resource type whose label is `ehn`. Then from that object we use the `edge_hostname` attribute, and as such the whole reference becomes `akamai_edge_hostname.ehn.edge_hostname`
 
 ## Exercises
-
 1. Create a terraform file named security.tf with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
 2. Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `akamai_appsec_configuration`
 3. Duplicate the two resources above and change the names, in order to create 2 config/policy pairs. 

@@ -51,7 +51,7 @@ resource "akamai_property" "my_property" {
 **Key points:**
 
 1. Instead of copying and pasting the same block multiple times, you write it once as a template
-2. The `for_each` argument tells Terraform what list/map to iterate over
+2. The `for_each` argument tells Terraform what list/map to iterate over. In this case the `var.hostnames` list.
 3. Inside the content block, you can reference the current item using `hostnames.value`
 4. Terraform will create one block for each item in your list/map
 

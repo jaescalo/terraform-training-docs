@@ -1,34 +1,70 @@
 # The count Meta-Argument
 
-count
+The `count` meta-argument accepts a number and creates as many instances of a resource without having to write the same configuration block multiple times. Think of it as a simple loop mechanism.
 
+## Example \#1
+For example, if we need to create multiple CP Codes:
 
-```hcl filename="main.tf" copy {}
-# Get the property IDs
-data "akamai_property" "properties" {
-    count = length(var.properties)
-    name = var.properties[count.index]
-}
+```hcl filename="main.tf" copy {2}
+resource "akamai_cp_code" "my_cp_code" {
+  count = 5
 
-locals {
-  # Remove the grp_ prefix from the group id
-  group_id = parseint(replace(data.akamai_contract.contract.group_id, "grp_", ""), 10)
-  # Remove the prp_ prefix from all properties
-  property_ids = [for item in data.akamai_property.properties[*].id : replace(item, "prp_", "")]
+  name        = "My CP Code"
+  contract_id = "C-0N7RAC7"
+  group_id    = "12345"
+  product_id  = "prd_Object_Delivery"
 }
 ```
 
-```hcl filename="main.tf" copy {}
-resource "akamai_dns_record" "tf_demo_dns_hostnames" {
+Because `count=5`, 5 new CP codes will be created on Akamai, and as far as Terraform is concerned 5 instances of CP codes were created which you can refer to in other parts of your Terraform code:
 
-  count = length(var.dns_hostnames)
+```hcl 
+# Individual instance
+akamai_cp_code.my_cp_code[0]  # First instance
+akamai_cp_code.my_cp_code[1]  # Second instance
+akamai_cp_code.my_cp_code[2]  # Third instance
+akamai_cp_code.my_cp_code[3]  # Fourth instance
+akamai_cp_code.my_cp_code[4]  # Fifth instance
 
-  zone       = var.dns_zone
+# All instances
+akamai_cp_code.my_cp_code[*]  # All instances as a list
+```
+
+However, all the CP codes will be named the same ("My CP Code") which is not ideal. 
+
+## Example \#2
+Let's review another example where we need to deploy several records of the same type to EdgeDNS:
+
+```hcl filename="main.tf" copy {7,12}
+variable "hostnames" {
+  default = ["www.example.com", "api.example.com", "blog.example.com"]
+}
+
+resource "akamai_dns_record" "my_dns_hostnames" {
+  count = length(var.hostnames)
+
+  zone       = "example.com"
   recordtype = "CNAME"
   ttl        = 60
-  target     = [var.edge_hostname]
-  name       = var.dns_hostnames[count.index]
+  target     = ["example.com.edgekey.net"]
+  name       = var.hostnames[count.index]
 }
+```
+
+In this case we are not explicitly giving `count` a number and instead we are telling it to use the length or our `hostnames` array which is 3. With this approach we can use the values in our array to fill in some of the arguments such as the `name`. `count.index` gives you the current iteration number (0, 1, 2, etc.).
+That index is used to pick the corresponding hostname from your list
+```text
+First record (index 0): www.example.com
+Second record (index 1): api.example.com
+Third record (index 2): blog.example.com
+```
+
+Similarly the created instances can be referenced as:
+
+```hcl 
+akamai_dns_record.my_dns_hostnames[0]  # First instance
+akamai_dns_record.my_dns_hostnames[1]  # Second instance
+akamai_dns_record.my_dns_hostnames[2]  # Third instance
 ```
 
 ## Exercises

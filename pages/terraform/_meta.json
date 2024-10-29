@@ -8,11 +8,11 @@
   "providers": {
     "title": "Providers"
   },
-  "data-sources": {
-    "title": "Data Sources"
-  },
   "resources": {
     "title": "Resources"
+  },
+  "data-sources": {
+    "title": "Data Sources"
   },
   "outputs": {
     "title": "Outputs"

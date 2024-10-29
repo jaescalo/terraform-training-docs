@@ -6,6 +6,15 @@ Data sources behave just like resources, except they are intended for infrastruc
 
 Data sources are declared similarly to resources, but use the `data` keyword. Like this:
 
+```hcl
+data "data_source_type" "data_source_instance" {
+    # Config options here
+}
+```
+
+Just like with the resources `data_source_type` comes from your provider and `data_source_instance` is the name or label you use for the _instance_ and must be unique.
+
+For example:
 ```hcl filename="main.tf" copy
 data "akamai_group" "my_group" {
      group_name   = "My Group"
@@ -20,7 +29,7 @@ Here, we are looking for the `akamai_group` named "My Group", which can be found
 Referencing data sources is similar to referencing resources, except data source IDs always start with `data`, whereas resources just start with the resource type. The format is as follows:
 
 ```hcl
-data.<data source type>.<instance label>.<instance attribute>
+data.<data source type>.<data source instance>.<instance attribute>
 ```
 
 For example:
