@@ -14,6 +14,12 @@ While Terraform is not an imperitive programming language such as Python, there 
 - `lower` - Converts a given string to all lower case, e.g. `lower("BaNANas")` returns "bananas"
 - `trimspace` - Remove any whitespace (space, tabs, newlines etc.) from the start and end of a string, e.g. `trimspace("    Hello, there  \n\n")` returns "Hello, there"
 
+### Collection Functions
+
+- `compact` - Takes a list of strings and returns a new list with any null or empty string elements removed, e.g. `compact(["a", "", "b", null, "c"])` returns `["a","b","c"]`
+- `concat` - Takes two or more lists and combines them into a single list, e.g. `concat(["a", ""], ["b", "c"])` returns `["a","","b","c"]`
+- `length` - Determines the length of a given list, map, or string, e.g. `length(["a", "b"])` returns `2`
+
 ### File Functions
 
 - `file` - Load the contents of a local file, e.g. `filecontent = file("${path.module}/data.txt")`
