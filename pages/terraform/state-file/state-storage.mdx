@@ -1,0 +1,79 @@
+
+# State Storage
+Terraform state files can be stored locally (on the user's machine) or remotely (e.g., in a cloud storage service like Linode's Object Storage). Remote storage is generally recommended for security reasons, team collaboration and disaster recovery.
+
+## Remote Backend
+By default the state file will be stored locally and you don't need to perform any additional steps. 
+Terraform supports several remote backends ([check the official and up to date documentation here](https://developer.hashicorp.com/terraform/language/backend)). To configure a remote backend the `backend` block inside the `terraform` block must be used. For example:
+
+```hcl filename="providers.tf" copy {10}
+terraform {
+  required_providers {
+    akamai = {
+      source  = "akamai/akamai"
+      version = "= 6.2.0"
+    }
+  }
+  required_version = "= 1.9.0"
+
+  backend "s3" {
+    skip_credentials_validation=true
+    skip_region_validation=true
+    skip_requesting_account_id=true
+    bucket="terraform-state"
+    key="terraform.tfstate"
+    region="us-mia-1"
+    endpoints={ s3 = "https://us-mia-1.linodeobjects.com" }
+    access_key="4CC3S5K3Y"
+    secret_key="53CR37K3Y"
+  }
+}
+```
+In this example the remote backend type `s3` is used to store the state file in Linode's Object Storage (S3 compatible). Different remote backends will use different configuration options. 
+
+### Remote Backend Configuration File
+In the previous example you may point out that adding credentials (`access_key` and `secret_key`) directly in the code is not secure, especially if the code will be uploaded to a version control repository. Instead, a new file containing the backend configuration can be created inside your Terraform project folder. For example a new file named "backend":
+
+```text {2}
+terraform-project/
+  ├── backend      
+  ├── main.tf         
+  ├── variables.tf    
+  ├── outputs.tf      
+```
+
+The contents for the "backend" file will be:
+```text copy
+skip_credentials_validation=true
+skip_region_validation=true
+skip_requesting_account_id=true
+bucket="terraform-state"
+key="terraform.tfstate"
+region="us-mia-1"
+endpoints={ s3 = "https://us-mia-1.linodeobjects.com" }
+access_key="4CC3S5K3Y"
+secret_key="53CR37K3Y"
+```
+
+Then you can remove all the options from the `bakend` block in your providers.tf:
+```hcl filename="providers.tf" copy {10}
+terraform {
+  required_providers {
+    akamai = {
+      source  = "akamai/akamai"
+      version = "= 6.2.0"
+    }
+  }
+  required_version = "= 1.9.0"
+
+  backend "s3" {}
+}
+```
+
+Finally, to apply the backend configuration you need to pass it during the `terraform init`:
+```shell
+terraform init -backend-config=backend -reconfigure
+```
+Where the `-backend-config` option points to the file containing the backend configuration. The `-reconfigure` flag is needed if you are reconfiguring the state file's location, for example from local to remote, or from one remote location to another. 
+
+Now you can add the backend file to your .gitignore configuration file to prevent uploading it to your git repository.

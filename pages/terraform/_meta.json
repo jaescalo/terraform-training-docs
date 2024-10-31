@@ -32,8 +32,8 @@
   "modules": {
     "title": "Modules"
   },
-  "state-management": {
-    "title": "State Management"
+  "state-file": {
+    "title": "State File"
   },
   "imports": {
     "title": "Imports"

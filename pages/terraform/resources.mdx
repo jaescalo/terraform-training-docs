@@ -6,7 +6,7 @@ Resources are the most important element in Terraform, and represent all the pie
 
 ```hcl
 resource "resource_type" "resource_instance" {
-    # Config options here
+    # ... configuration options ...
 }
 ```
 
@@ -53,7 +53,7 @@ resource "akamai_edge_hostname" "ehn" {
 
 resource "akamai_property" "property" {
   name        = "property"
-  ...
+  # ... other configuration ...
   hostnames {
     cname_from             = "www.example.com"
     cname_to               = akamai_edge_hostname.ehn.edge_hostname

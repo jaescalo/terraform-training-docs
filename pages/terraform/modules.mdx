@@ -28,7 +28,7 @@ terraform-project/
 It may not come by surprise at this point that the Terraform code you've created (root module) so far can be used as a child module with little or no changes at all.
 
 ## Calling a Child Module
-Modules are called from within other modules using module blocks:
+Modules are called from within other modules using `module` blocks:
 ```hcl filename="main.tf" {2}
 module "cert_enrollment" {
   source = "./modules/cps"  # Path to module
@@ -40,7 +40,7 @@ module "cert_enrollment" {
 ```
 
 **Key Components:**
-
+* The label immediately after the `module` keyword is a local name (cert_enrollment in above's example), which the calling module can use to refer to this instance of the module.
 * Source: Where the module code lives (local path in this case but it could also be a Git repo or Terraform Registry)
 * Input Variables: Parameters you can pass to customize the module. These parameters must exist as variables in the child module.
 * Resources: The `my-module` contains the resources.
@@ -57,7 +57,7 @@ variable "common_name" {}
 resource "akamai_cps_dv_enrollment" "my_enrollment" {
   contract_id = var.contract
   common_name = var.common_name
-  # More arguments ... 
+  # ... other configuration ...
 }
 ```
 
@@ -78,7 +78,7 @@ module "cert_enrollment" {
   source = "./modules/cps"  # Path to module
   contract   = "C-0N7RAC7"
   common_name = "www.example.com"
-  # More arguments ...
+  # ... other configuration ...
 }
 
 resource "akamai_edge_hostname" "my_edge_hostname" {
@@ -96,3 +96,6 @@ module "akamai_edgedns" {
   challenge_records     = module.cert_enrollment.dns_challenges
 }
 ```
+
+## Exercises
+Coming Soon...

@@ -37,7 +37,7 @@ variable "hostnames" {
 }
 
 resource "akamai_property" "my_property" {
-    ...
+    # ... other configuration ...
     dynamic "hostnames" {
         for_each = var.hostnames
         content {

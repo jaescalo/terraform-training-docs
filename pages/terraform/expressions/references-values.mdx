@@ -18,7 +18,7 @@ data "akamai_group" "my_group" {
 
 resource "akamai_property" "example" {
     group_id    = data.akamai_group.my_group.id
-    ...
+    # ... other configuration ...
 }
 ```
 
@@ -40,7 +40,7 @@ resource "akamai_edge_hostname" "ehn" {
 
 resource "akamai_property" "property" {
   name        = "property"
-  ...
+  # ... other configuration ...
   hostnames {
     cname_from             = "www.example.com"
     cname_to               = akamai_edge_hostname.ehn.edge_hostname
@@ -119,7 +119,7 @@ module "rule_tree" {
 
 resource "akamai_property" "my_property" {
   name        = var.property_name
-  ...
+  # ... other configuration ...
   rule_format   = module.rule_tree.rule_format
   rules         = module.rule_tree.rules
 }

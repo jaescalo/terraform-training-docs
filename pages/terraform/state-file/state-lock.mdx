@@ -1,0 +1,20 @@
+
+# State Locking
+To prevent concurrent modifications which could corrupt the state file, Terraform supports state locking, which can be implemented with various backends (e.g., Azure Blob Storage, Amazon DynamoDB, HashiCorp Consul).
+
+State locking happens automatically on all operations that could write state. If state locking fails for any reason, Terraform will not continue. You can disable state locking for most commands with the `-lock=false` flag but it is not recommended without a good reason and further investigation of the problem (if any).
+
+Not all backends support locking. Check the [documentation for each backend](https://developer.hashicorp.com/terraform/language/backend)
+
+## Force Unlock
+You can manually unlock the state if the unlocking failed. You'll need to capture the lock ID and run the `force-unlock` command:
+
+```shell
+terraform force-unlock -force LOCK_ID
+```
+For example:
+```shell
+terraform force-unlock -force 04a89d3f-be63-5024-b845-ee60fa9f8cae
+```
+
+> ⚠️ **Warning:** Be careful with forcing ulock the state file. If someone else is holding the lock it could cause multiple writes. 
