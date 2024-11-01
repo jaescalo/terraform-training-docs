@@ -1,3 +1,63 @@
-# Imports
+# Import to Terraform
 
-Add info here...
+Terraform import allows you to bring existing infrastructure resources under Terraform management. Here's how it works:
+
+1. First, you write a resource configuration block in your Terraform code that matches the resource you want to import.
+
+2. Then you use the `terraform import` command with the syntax:
+
+```shell copy
+terraform import [resource_type].[resource_instance] [resource_id]
+```
+The `resource_id`is resource-specific. You can find the required ID in the provider documentation for the resource you wish to import.
+
+3. Terraform will:
+    * Find the existing resource
+    * Add it to your state file
+    * Allow you to manage it going forward with Terraform
+
+## Example
+Let's assume we have a Cloudlet policy deployed and we want to manage it in Terraform going forward. The first step is to add the resource to the Terraform code:
+
+```hcl filename="main.tf" copy {}
+resource "akamai_cloudlets_policy" "policy" {
+  name          = "my_cloudlet_policy"
+  cloudlet_code = "ER"
+  description   = "Marketing"
+  group_id      = "12345"
+  match_rules   = data.akamai_cloudlets_edge_redirector_match_rule.match_rules_er_default.json
+  is_shared     = true
+}
+```
+Observe the `data` source type for the `match_rules` argument must also exist because it is a dependency for the `akamai_cloudlets_policy` resource. We'll skip it for now but you can check the [Cloudlets subprovider](https://techdocs.akamai.com/terraform/docs/cl-ds-edge-redirector-match-rule) for more information.
+
+Once the resource has been defined in the main.tf file we can proceed with the import:
+```shell copy
+terraform import akamai_cloudlets_policy.policy my_cloudlet_policy
+```
+
+In this particular case the Cloudlet ID matches with the `name` argument in the resource definition. However, this may not always be the case. See the following import commands for other various resources:
+
+```shell copy
+# EdegeDNS
+terraform import akamai_dns_zone.my_zone ZONE_NAME
+
+#AppSec
+terraform import akamai_appsec_configuration.my_config CONFIG_ID
+
+# EdgeKV
+terraform import akamai_edgekv.my_edgekv NAMESPACE:NETWORK
+
+# CP Code
+terraform import akamai_cp_code.my_cp_code CP_CDOE_ID,CONTRACT_ID,GROUP_ID
+
+# Property
+terraform import akamai_property.my_property PROPERTY_ID,CONTRACT_ID,GROUP_ID,PROPERTY_VERSION
+```
+
+## Akamai CLI
+What if there was a tool that did all this for you for Akamai resources. Well, there is!
+The [Akamai CLI for Akamai Terraform Provider](https://github.com/akamai/cli-terraform) can convert Akamai resources to Terraform resources and provide you with all the import commands to create the initial stage file. 
+
+## Exercises
+Coming Soon...
