@@ -1,0 +1,82 @@
+# Terraform Environment Variables
+
+Environment variables are set at the OS or platform level and made available to the Terraform runtime. These are not necessary, however they allow you to customize certain Terraform behaviors. 
+
+## TF_LOG
+For example the `TF_LOG` environment variable enables detailed logs to appear on stderr which is useful for debugging. For example:
+```shell copy
+export TF_LOG=trace
+```
+To disable, either unset it, or set it to off. For example:
+```shell copy
+export TF_LOG=off
+```
+
+## TF_VAR_*
+Another very helpful Terraform environment variable is `TF_VAR_name`. This environment variable can be used to set variables in Terraform where the `name` suffix is replaced with the name of your Terraform variable. For example:
+```shell copy
+export TF_VAR_environment=prod
+```
+The variable must be defined in Terraform for this to work, and a default value can be set as a fail safe in case the variable is not set as an environment variable: 
+```hcl filename="variables.tf" copy {1,4}
+variable "environment" {
+  type        = string
+  description = "Contract ID"
+  default     = "dev"
+}
+```
+### Akamai Credentials as TF_VAR_*
+A very common use of this environment variables is to set the Akamai API credentials. The credentials must be made available as environment variables:
+
+    **_MacOS_**
+    - Export the variables:
+    ```bash copy
+    export TF_VAR_akamai_client_secret="abc123"
+    export TF_VAR_akamai_host="abc123.luna.akamaiapis.net"
+    export TF_VAR_akamai_access_token="abc123"
+    export TF_VAR_akamai_client_token="abc123"
+    export TF_VAR_akamai_account_key="1-23ABC"
+    ```
+    **_Windows_**
+    - Right-click Start Menu, select "Windows Powershell (Admin)"
+    ```powershell copy
+    $env:TF_VAR_akamai_client_secret="abc123"
+    $env:TF_VAR_akamai_host="abc123.luna.akamaiapis.net"
+    $env:TF_VAR_akamai_access_token="abc123"
+    $env:TF_VAR_akamai_client_token="abc123"
+    $env:TF_VAR_akamai_account_key="1-23ABC"
+    ```
+If you're not working with more than one account disregard the `TF_VAR_akamai_account_key` and `account_key` below.
+
+In your variables.tf you must define the variables:
+```hcl filename="variables.tf" copy
+variable "akamai_client_secret" {}
+variable "akamai_host" {}
+variable "akamai_access_token" {}
+variable "akamai_client_token" {}
+variable "akamai_account_key" {}
+```
+
+Finally the variables must be referenced in the provider block:
+```hcl filename="providers.tf" copy
+provider "akamai" {
+  config {
+    client_secret = var.akamai_client_secret
+    host          = var.akamai_host
+    access_token  = var.akamai_access_token
+    client_token  = var.akamai_client_token
+    account_key   = var.akamai_account_key
+  }
+}
+```
+
+## Specific Environment Variables
+Different platforms (e.g. Gitlab CI/CD, GiHub Workflows, etc) and different Terraform providers will make available their own environment variables which can be found in each of the developer's documentation. 
+
+For instance the [environment variables for the Akamai Provider](https://techdocs.akamai.com/terraform/docs/environment-variables). 
+
+---
+
+## Exercises
+
+1. Switch to environment variables for the Akamai API Credentials instead of referring to the .edgerc file. 

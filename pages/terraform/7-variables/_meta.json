@@ -1,0 +1,11 @@
+{
+  "7a-variables": {
+    "title": "Variables"
+  },
+  "7b-locals": {
+    "title": "Locals"
+  },
+  "7c-env-variables": {
+    "title": "Environment Variables"
+  }
+}

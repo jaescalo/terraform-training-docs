@@ -1,0 +1,72 @@
+# For Expressions
+
+A `for` expression in Terraform is like a loop that helps you transform or process lists and maps of data. Think of it as a way to say "for each item in this collection, do something with it". For more information about `for` expression [check here](https://developer.hashicorp.com/terraform/language/expressions/for) 
+
+Here are some common use cases with simple examples:
+
+## Creating a new list from an existing list
+Convert a list of domains into edge hostnames.
+```hcl filename="main.tf" copy {7}
+variable "domains" {
+  default = ["example.com", "api.example.com"]
+}
+
+locals {
+  edge_hostnames = [for domain in var.domains : "${domain}.edgesuite.net"]
+  # Result: [
+  #   "example.com.edgesuite.net",
+  #   "api.example.com.edgesuite.net"
+  # ]
+} 
+```
+
+## Creating a map from a list
+Converting a list of hostnames into a map containing the respective edge hostnames.
+```hcl filename="main.tf" copy {3}
+locals {
+  edge_hostnames = {for domain in var.domains : "${domain}" => "${domain}.edgesuite.net"}
+  # Result: {
+  #   "api.example.com" = "api.example.com.edgesuite.net"
+  #   "example.com"     = "example.com.edgesuite.net"
+  # }
+}
+```
+
+## Filtering items
+Filter out the example.com domain from the list.
+```hcl filename="main.tf" copy {7}
+variable "all_names" {
+  default = ["example.com", "api.example.com", "www.example.com"]
+}
+
+locals {
+  hostnames = [for item in var.all_names : item if item != "example.com"]
+}
+
+output "hostname" {
+  value = local.hostnames
+}
+# Result: [
+#   "api.example.com",
+#   "www.example.com"
+# ]
+```
+
+The main benefits of `for` expressions are:
+
+- They help you avoid repetitive code
+- They make it easier to process lists and maps
+- They allow you to transform data into the format you need
+- They're great for creating multiple similar resources
+
+---
+
+## Exercises
+1. Create the following variable in your variables.tf:
+```hcl filename="variables.tf" copy
+variable "apps" {
+  default = [ "www", "api", "blog", "shop", "cdn"]
+}
+```
+2. With the use of the `for` expression convert each app name above into a hostname by appending the example.com domain. The new local variable containing the new hostnames list can be named `app_hostnames` and we will use it in later exercises.
+3. Commit your change and push it to GitHub. 

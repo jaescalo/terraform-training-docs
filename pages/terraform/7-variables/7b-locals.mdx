@@ -1,0 +1,62 @@
+# Terraform Locals
+
+In Terraform, locals are variables which you can use just as regular input variables, except that locals have the power to do several things regular variables do not. Commonly, locals take advantage of Terraform's many built-in functions, [details of which you can find here](/terraform/built-in-functions).
+The use of locals also avoid repetition, so you can use the name multiple times within your code instead of repeating the expression.
+
+## Declaration
+
+Locals are declared in a `locals` block, and must be assigned a value. Accordingly, the data type is inferred from the assignment, i.e. if you create a local variable and give it a string value, it will be a string.
+
+```hcl
+locals {
+  service_name = "forum"
+  owner        = "Community Team"
+}
+```
+
+## Variable Interpolation
+
+If you were to just assign a string value, then you could just use a regular variable. More commonly values are inferred from other variables (whether locals or vars), which you cannot do in regular variables. For example:
+
+```hcl
+locals {
+  property_tag = "${akamai_property.property.property_id}/${akamai_property.property.latest_version}"
+}
+```
+
+The variable interpolation syntax is as follows:
+
+```hcl
+"${<variable>}"
+```
+
+Variables, be they input variables, resource or data source outputs, or whatever, must be wrapped in quotes and the variable itself wrapped in `${}`
+
+## Using Locals
+
+Local variables can be evaluated just as input variables can, with the only difference being the prefix used is `local`, rather than `var`.
+
+For example:
+
+```hcl filename="main.tf" copy {6}
+locals {
+    zone = "example.com"
+}
+
+resource "akamai_dns_record" "example_com_example_com_AKAMAITLC" {
+    zone = local.zone
+    name = "www.example.com"
+    recordtype = "CNAME"
+    target = ["www.example.com.edgesuite.net"]
+    ttl = 1800
+}
+```
+
+---
+
+## Exercises
+
+1. In your main.tf create a local named `notes` which could be referenced in different resources later on (e.g. `akamai_appsec_activations`, `akamai_property`).
+2. The `notes` local is a joined string containing a ficticious ticket ID (e.g. TF-3001) and the group ID.
+3. Run terraform.
+4. Commit your change and push it to GitHub. 

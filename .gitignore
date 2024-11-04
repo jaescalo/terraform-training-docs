@@ -6,5 +6,6 @@ extra
 terraform_code
 
 tests/
+exercises/
 
 *lock.json

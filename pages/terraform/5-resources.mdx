@@ -1,0 +1,88 @@
+# 5. Resources
+
+Resources are the most important element in Terraform, and represent all the pieces of infrastructure you are managing within Terraform. Every resource is declared in the format:
+
+## Syntax
+
+```hcl
+resource "resource_type" "resource_instance" {
+    # ... configuration options ...
+}
+```
+
+`resource_type` comes from your provider, e.g. `akamai_property`, and can (and likely will) be reused many times. However, `resource_instance` is the name or label you use for the _instance_ of your resource type and as such must be unique. For example, a pair of property resources might look like this:
+
+```hcl {1,9}
+resource "akamai_property" "my-property" {
+    name        = "my-property"
+    product_id  = "prd_product"
+    contract_id = "ctr_C-0N7RAC7"
+    group_id    = "grp_12345"
+    rule_format = "v2023-01-05"
+}
+
+resource "akamai_property" "my-other-property" {
+    name        = "my-other-property"
+    product_id  = "prd_product"
+    contract_id = "ctr_C-0N7RAC7"
+    group_id    = "grp_12345"
+    rule_format = "v2023-01-05"
+}
+```
+
+Your terraform files will likely be largely made up of resources, which can be often different types but it is common to have multiple instances of the same type.
+
+## Referencing Resources
+
+When you create a resource in terraform it is common to need to reference some aspect of that resource. This is done in the following format:
+
+```hcl
+<resource type>.<resource instance>.<instance attribute>
+```
+
+For example, if you were configuring a property resource and wanted to refer to the name of an edgehostname you had created above, you could do it like this:
+
+```hcl filename="main.tf" copy {14}
+resource "akamai_edge_hostname" "ehn" {
+  product_id    = "prd_Fresca"
+  contract_id   = data.akamai_contract.contract.id
+  group_id      = data.akamai_group.group.id
+  ip_behavior   = "IPV4"
+  edge_hostname = "www.example.com.edgesuite.net"
+}
+
+resource "akamai_property" "property" {
+  name        = "property"
+  # ... other configuration ...
+  hostnames {
+    cname_from             = "www.example.com"
+    cname_to               = akamai_edge_hostname.ehn.edge_hostname
+    cert_provisioning_type = "CPS_MANAGED"
+  }
+}
+```
+
+Here, we reference our instance of the `akamai_edge_hostname` resource type whose label is `ehn`. Then from that object we use the `edge_hostname` attribute, and as such the whole reference becomes `akamai_edge_hostname.ehn.edge_hostname`
+
+---
+
+## Exercise \#1
+
+1. Create a terraform file named security.tf with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
+2. Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `data.akamai_appsec_configuration`.
+3. Run a `terraform apply`
+4. Duplicate the policy resouce and make the necessary modifications to create a new policy. 
+5. Run another `terraform apply`
+6. Run a `terraform destroy`. What happens?
+7. Commit your changes and push them to GitHub. 
+
+
+## Exercise \#2
+
+1. Create a terraform file named property.tf with the following resources:
+  - CP Code: use the resource `akamai_cp_code` to create a new CP code
+  - Edge Hostname: use the resources `akamai_property` resource, cp_code and edge_hostname
+  - Property: use the resources `akamai_property` resource, cp_code and edge_hostname
+2. Observe you'll need to configure a fule tree for the `akamai_property` too. _Hint_: check the `data.akamai_property_rules_builder` data source.
+3. Run another `terraform apply`
+4. Commit your changes and push them to GitHub. 

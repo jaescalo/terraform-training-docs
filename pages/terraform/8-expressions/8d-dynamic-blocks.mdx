@@ -1,0 +1,76 @@
+# Dynamic Blocks
+
+A dynamic block is like a template that repeats itself based on a list or map of data. This allows you to dynamically construct repeatable nested blocks which are supported inside `resource`, `data`, `provider`, and `provisioner` blocks. [Go here for more on Terraform Dynamic Blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks).
+
+Take for example this `akamai_property` resource:
+```hcl filename="main.tf" copy {8,13,18}
+resource "akamai_property" "my_property" {
+    name    	= "MyProperty"
+    product_id  = "prd_Object_Delivery"
+    contract_id = "C-0N7RAC7"
+    group_id    = "12345"
+    rule_format   = data.akamai_property_rules_builder.my_property_rule_default.rule_format
+    rules         = data.akamai_property_rules_builder.my_property_rule_default.json
+    hostnames {
+        cname_from             = "www.example.com"
+        cname_to               = "example.com.edgesuite.net"
+        cert_provisioning_type = "DEFAULT"
+    }
+    hostnames {
+        cname_from             = "api.example.com"
+        cname_to               = "example.com.edgesuite.net"
+        cert_provisioning_type = "DEFAULT"
+    }
+    hostnames {
+        cname_from             = "blog.example.com"
+        cname_to               = "example.com.edgesuite.net"
+        cert_provisioning_type = "DEFAULT"
+    }
+}
+```
+
+The `hostnames` nested block is repeated as many times as hostnames. Instead a `dynamic` block can be used to avoid repetition:
+
+```hcl filename="main.tf" copy {7,8,9}
+variable "hostnames" {
+  default = ["www.example.com", "api.example.com", "blog.example.com"]
+}
+
+resource "akamai_property" "my_property" {
+    # ... other configuration ...
+    dynamic "hostnames" {
+        for_each = var.hostnames
+        content {
+            cname_from             = hostnames.value
+            cname_to               = "example.com.edgesuite.net"
+            cert_provisioning_type = "DEFAULT"
+        }
+    }
+}
+```
+**Key points:**
+
+1. Instead of copying and pasting the same block multiple times, you write it once as a template
+2. The `for_each` argument tells Terraform what list/map to iterate over. In this case the `var.hostnames` list.
+3. Inside the content block, you can reference the current item using `hostnames.value`
+4. Terraform will create one block for each item in your list/map
+
+It's particularly useful when:
+
+- You have multiple similar configurations
+- The number of blocks might change (like adding/removing hostnames)
+- You want to keep your code DRY (Don't Repeat Yourself)
+
+Without dynamic blocks, you'd have to manually write out each hostname block, which would be repetitive and harder to maintain.
+
+---
+
+## Exercises
+
+- At this point you should have a property.tf file that creates a property with a single hostname. If not review the Exercise #2 in module [5. Resources](/terraform/5-resources#exercise-2).
+
+- You should also have a list of hostnames in a variable named `apps_hostnames` from the previous exercise in module [For Expressions](/terraform/8c-for-loops#exercises).
+
+1. Add a `dynamic` block in the `akamai_property` resource to add all the hostnames in the `apps_hostnames` list to the property. The hostnames can share the same edge hostname and other required parameters.
+2. Run terraform
+3. Commit your change and push it to GitHub. 

@@ -1,0 +1,56 @@
+# 4. Data Source
+
+Data sources are intended for infrastructure which already exists. As such, they are not created, updated or destroyed by Terraform, but rather simply referenced. Think of them as read-only.
+
+## Syntax
+
+Data sources are declared similarly to resources, but use the `data` keyword. Like this:
+
+```hcl
+data "data_source_type" "data_source_instance" {
+    # ... configuration options ...
+}
+```
+
+They `data_source_type` comes from your provider and `data_source_instance` is the name or label you use for the _instance_ and must be unique.
+
+For example:
+```hcl filename="main.tf" copy
+data "akamai_group" "my_group" {
+     group_name   = "My Group"
+     contract_id  = "1-2AB34C"
+}
+```
+
+Here, we are looking for the `akamai_group` named "My Group", which can be found in the given contract. This is useful as we may wish to use the group ID but only know its name. 
+
+# Referencing Data Sources
+
+References to data source IDs always start with `data`, and then the type and instance names separated by `.`. The format is as follows:
+
+```hcl
+data.<data source type>.<data source instance>.<instance attribute>
+```
+
+For example:
+
+```hcl filename="main.tf" copy {2}
+resource "akamai_property" "example" {
+    group_id    = data.akamai_group.my_group.id
+    # ... other configuration ...
+}
+```
+
+Here we cross-reference the `id` attribute of the `my_group` instance of the `akamai_group` data source, in order to use it in our `akamai_property` resource. References can be used in different types of Terraform blocks such as [modules](/terraform/modules) and [outputs](/terraform/outputs).
+
+---
+
+## Exercises
+
+1. Create a Terraform file named main.tf which contains 3 data sources:
+    - `akamai_appsec_configuration`, referencing a single config
+    - `akamai_group`, referencing a single group. _Hint_: In techdocs check the [Base IDs](https://techdocs.akamai.com/terraform/docs/common-identifiers) section.
+    - `akamai_property`, referencing a single Akamai property
+3. Run a `terraform apply`
+2. What happens?
+4. Commit your changes and push them to GitHub. 
