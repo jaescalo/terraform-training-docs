@@ -19,7 +19,95 @@ export AKAMAI_HTTP_TRACE_ENABLED=true
 ```
 
 ## Akamai Provider Code
-Sometimes when the documentation is not enough you may need to dig into [Akamai provider's code](https://github.com/akamai/terraform-provider-akamai).  
+Sometimes when the documentation is not enough you may need to dig into the [Akamai provider's code](https://github.com/akamai/terraform-provider-akamai). The cdoe is writen in Go.  
 
 ## Common Errors
 Coming soon ...
+
+```
+│ Error: Duplicate data "akamai_property_rules_template" configuration
+│
+│   on property.tf line 16:
+│   16: data "akamai_property_rules_template" "rules" {
+│
+│ A akamai_property_rules_template data resource named "rules" was already declared at main.tf:3,1-46. Resource names must be unique per type in each module.
+```
+
+```log
+| Error: Title: Invalid Input Error; Type: https://problems.luna.akamaiapis.net/appsec-configuration/error-types/INVALID-INPUT-ERROR; Detail: Config name [Security Automation - PoC] already exists.
+| 
+|   with akamai_appsec_configuration.config,
+|   on main.tf line 68, in resource "akamai_appsec_configuration" "config":
+|   68: resource "akamai_appsec_configuration" "config" {
+
+Error: Terraform exited with code 1.
+Error: Process completed with exit code 1
+```
+| 
+Open GitHub Issue
+
+
+```
+akamai_appsec_configuration.config: Refreshing state... [id=105344]
+Error: Plugin did not respond
+The plugin encountered an error, and failed to respond to the plugin. *GRPCProvider).ReadResource call. The plugin logs may contain more details.
+Stack trace from the terraform-provider-akamai_v6.4.0.exe plugin:
+panic: unaligned 64-bit atomic operation
+goroutine 61 [running]:
+runtime/internal/atomic.panicUnaligned()
+runtime/internal/atomic/unaligned.go:8 +0x2b
+runtime/internal/atomic.Xadd64(0x1b5fe4ac, 0x1)
+runtime/internal/atomic/atomic_386.5:125 +0x11
+github.com/allegro/bigcache/v2. (*cacheShard) -miss...)
+github.com/allegro/bigcache/v2@2.2.5/shard.go:398
+github.com/allegro/bigcache/v2. (*cacheShard) -getWrappedEntry0x1b5fe420, 0xc84d2d1ea7d6a2dd)
+github.com/allegro/bigcache/v2@2.2.5/shard.go:88 0x10c
+```
+
+```
+│ Error: updating rule tree: API error:
+│ {
+│ "type": "https://problems.luna.akamaiapis.net/papi/v0/property-version/lock-error",
+│ "title": "Unable to edit read-only element",
+│ "detail": "Only Akamai representatives can change read-only behaviors, criteria and child rules.",
+│ "instance": "https://akab-yr3r4cjribyw6v6x-abboeys6bqat7ohb.luna.akamaiapis.net/papi/v1/properties/prp_974136/versions/113/rules?contractId=ctr_M-1V6I2VP\u0026groupId=grp_190190#c52d6682d5230d59",
+│ "statusCode": 403,
+│ "errors": [
+│ {
+│ "removed": [
+│ {
+│ "behavior": {
+│ "name": "advanced",
+│ "options": {
+│ "description": "",
+│ "xml": "\u003cforward:cache-parent.rollback-retry-post\u003eoff\u003c/forward:cache-parent.rollback-retry-post\u003e\n\u003cforward:availability.retry-post.status\u003eon\u003c/forward:availability.retry-post.status\u003e"
+│ },
+│ "uuid": "0ed3dae7-6b3f-4c9a-8d91-f8dc85ffd6a1"
+│ },
+│ "location": "#/rules/children/5/behaviors/0"
+│ }
+│ ],
+│ "type": "https://problems.luna.akamaiapis.net/papi/v0/property-version/lock-error/behaviors-changed",
+│ "title": "Read-only behaviors changed",
+│ "detail": "Read-only behaviors have been added, removed, changed or moved."
+│ }
+│ ]
+│ }
+│
+│ with akamai_property.www-test-t-mobile-com,
+│ on property.tf line 12, in resource "akamai_property" "www-test-t-mobile-com":
+│ 12: resource "akamai_property" "www-test-t-mobile-com" {
+```
+
+```
+╷
+│ Error: Duplicate data "akamai_property_rules_template" configuration
+│
+│   on property.tf line 16:
+│   16: data "akamai_property_rules_template" "rules" {
+│
+│ A akamai_property_rules_template data resource named "rules" was already declared at main.tf:16,1-46. Resource names must be unique per type in each module.
+```
+
+
+

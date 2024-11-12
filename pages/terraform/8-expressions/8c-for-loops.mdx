@@ -1,4 +1,4 @@
-# For Expressions
+# `for` Expressions
 
 A `for` expression in Terraform is like a loop that helps you transform or process lists and maps of data. Think of it as a way to say "for each item in this collection, do something with it". For more information about `for` expression [check here](https://developer.hashicorp.com/terraform/language/expressions/for) 
 
@@ -68,5 +68,6 @@ variable "apps" {
   default = [ "www", "api", "blog", "shop", "cdn"]
 }
 ```
-2. With the use of the `for` expression convert each app name above into a hostname by appending the example.com domain. The new local variable containing the new hostnames list can be named `app_hostnames` and we will use it in later exercises.
-3. Commit your change and push it to GitHub. 
+2. In your main.tf with the use of the `for` expression convert each app name above into a hostname by appending the example.com domain. The new local variable containing the new hostnames list can be named `app_hostnames` and we will use it in later exercises.
+3. Output the `app_hostnames` local to confirm the logic is applied.
+4. Commit your change and push it to GitHub. 

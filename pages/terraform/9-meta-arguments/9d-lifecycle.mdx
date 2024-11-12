@@ -78,4 +78,7 @@ resource "akamai_property_activation" "my_activation" {
 
 ## Exercises
 
-Coming Soon...
+1. Add lifecyle `ignore_changes` to both of the 2 `akamai_property_activation` resources in your property.tf to prevent changes to the notes to trigger activations. 
+2. Run terraform
+3. Make a change to the `note` argument and run Terraform again. What happens?
+4. Commit your change and push it to GitHub. 
