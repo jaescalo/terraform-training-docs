@@ -34,11 +34,8 @@ module "activate-security" {
 
 ---
 
-## Exercises
+## Exercise
 
-1. Add 2 `akamai_property_activation` resources to your property.tf. One for the staging network and the other one for the production network. _Hint_: You can use the `local.notes` defined in the Exercises section in module [7. Terraform Locals](/terraform/7-variables/7b-locals#exercises)
-2. Add a `depends_on` to the production activation resource so that the production activation doesn't start until the staging activation has completed.
-3. Run terraform
-4. Commit your change and push it to GitHub. 
+import ExerciseDependsOn from "../../exercises/9a-ex-depends-on.mdx"
 
-Although this is not a real use case it shows how the order of the resources updates/creations can be somewhat controlled.
+<ExerciseDependsOn />

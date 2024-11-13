@@ -1,0 +1,6 @@
+- You should have a list of hostnames in a local variable named `apps_hostnames` from the previous exercise in module [For Expressions](/terraform/8c-for-loops#exercises).
+
+1. Create a new dns.tf file and add the `akamai_dns_record` resource.
+2. Using `count` configure `akamai_dns_record` to create as many CNAME records as entries in `apps_hostnames`.
+3. Run terraform
+4. Commit your change and push to GitHub. 

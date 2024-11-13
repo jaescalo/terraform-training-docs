@@ -66,24 +66,8 @@ Here, we reference our instance of the `akamai_edge_hostname` resource type whos
 
 ---
 
-## Exercise \#1
+## Exercises
 
-1. Create a terraform file named security.tf with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
-2. Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `data.akamai_appsec_configuration`.
-3. Run a `terraform apply`
-4. Duplicate the policy resouce and make the necessary modifications to create a new policy. 
-5. Run another `terraform apply`
-6. Run a `terraform destroy`. What happens?
-7. Re-apply your terraform code to recreate your resources as we may need them later on. 
-8. Commit your changes and push them to GitHub. 
+import ExerciseResources from "../exercises/5-ex-resources.mdx"
 
-
-## Exercise \#2
-
-1. Create a terraform file named property.tf with the following resources:
-  - CP Code: use the resource `akamai_cp_code` to create a new CP code
-  - Edge Hostname: use the resources `akamai_property` resource, cp_code and edge_hostname
-  - Property: use the resources `akamai_property` resource, cp_code and edge_hostname
-2. Observe you'll need to configure a tree for the `akamai_property` too. _Hint_: check the `data.akamai_property_rules_builder` data source in Techdocs.
-3. Run another `terraform apply`
-4. Commit your changes and push them to GitHub. 
+<ExerciseResources />

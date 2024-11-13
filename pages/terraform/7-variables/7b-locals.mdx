@@ -54,9 +54,8 @@ resource "akamai_dns_record" "example_com_example_com_AKAMAITLC" {
 
 ---
 
-## Exercises
+## Exercise
 
-1. In your main.tf create a local named `notes` which could be referenced in different resources later on (e.g. `akamai_appsec_activations`, `akamai_property`).
-2. The `notes` local is a joined string containing a ficticious ticket ID (e.g. TF-3001) and the group ID.
-3. Run terraform.
-4. Commit your change and push it to GitHub. 
+import ExerciseLocals from "../../exercises/7b-ex-locals.mdx"
+
+<ExerciseLocals />

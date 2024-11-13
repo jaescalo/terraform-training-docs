@@ -1,0 +1,16 @@
+import { Steps } from 'nextra/components'
+
+- At this point you should have a **_property.tf_** file that creates a property with a single hostname. If not review the Exercise #2 in module [5. Resources](/terraform/5-resources#exercise-2).
+
+- You should also have a list of hostnames in a local variable named `apps_hostnames` from the previous exercise in module [For Expressions](/terraform/8c-for-loops#exercises).
+
+<Steps>
+{<h3>Configure</h3>}
+Add a `dynamic` block in the `akamai_property` resource to add all the hostnames in the `apps_hostnames` list to the property. The hostnames can share the same edge hostname and other required parameters.
+
+{<h3>Plan/Apply</h3>}
+Run `terraform plan` to confirm your changes. Run `terraform apply` if all looks in order.
+
+{<h3>Commit</h3>}
+Commit your change and push it to GitHub. 
+</Steps>

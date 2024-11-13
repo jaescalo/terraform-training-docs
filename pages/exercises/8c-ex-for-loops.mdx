@@ -1,0 +1,23 @@
+import { Steps } from 'nextra/components'
+
+<Steps>
+{<h3>Configure</h3>}
+Create the following variable in your **_variables.tf_**:
+```hcl filename="variables.tf" copy
+variable "apps" {
+  default = [ "www", "api", "blog", "shop", "cdn"]
+}
+```
+
+{<h3>Update</h3>}
+In your **_main.tf_** and with the use of the `for` expression, convert each app name above into a hostname by appending the example.com domain. The new local variable containing the new hostnames list can be named `app_hostnames` and we will use it in later exercises.
+
+{<h3>Output</h3>}
+Output the `app_hostnames` local to confirm the logic is applied.
+
+{<h3>Plan</h3>}
+Run `terraform plan`. You could run `terraform apply` too, but because we are not modifying any resources no changes will be applied anyway.
+
+{<h3>Commit</h3>}
+Commit your change and push it to GitHub. 
+</Steps>

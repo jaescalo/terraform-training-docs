@@ -107,13 +107,8 @@ variable "env" {
 
 ---
 
-## Exercises
+## Exercise
 
-1. Create a variables.tf file which declares the variables `edgerc_path` and `config_section`, both of type `string`. Configure these with descriptions and default values
-2. Update your provider.tf file to use these variables in the `provider "akamai"` block
-3. Run `terraform init` and confirm the provider is installed correctly
-4. Run `terraform plan`, providing new values for the 2 variables using the `-var` syntax
-5. Create a terraform.tfvars file and use it to set new values for both variables. Re-run `terraform plan` using this file instead.
-4. Commit your changes and push them to GitHub. 
+import ExerciseVariables from "../../exercises/7a-ex-variables.mdx"
 
-> Hint: If you use terraform.tfvars you don't need to tell Terraform the variable file's name. If you use anything else (.tfvars) you must use `-var-file`
+<ExerciseVariables />

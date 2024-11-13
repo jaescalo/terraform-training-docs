@@ -1,0 +1,29 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+<Steps>
+{<h3>New File</h3>}
+Create a **_variables.tf_** file which declares the variables `edgerc_path` and `config_section`, both of type `string`. Configure these with descriptions and default values.
+
+{<h3>Update</h3>}
+Update your **_provider.tf_** file to use these variables in the `provider "akamai"` block.
+
+{<h3>Init</h3>}
+Run `terraform init` and confirm the provider is installed correctly.
+
+{<h3>Plan</h3>}
+Run `terraform plan`, providing new values for the 2 variables using the `-var` syntax. You could run `terraform apply` too, but because we are not modifying any resources no changes will be applied anyway.
+
+{<h3>New File</h3>}
+Create a **_terraform.tfvars_** file and use it to set new values for both variables. 
+
+{<h3>Plan</h3>}
+Re-run `terraform plan` using this file instead. You could run `terraform apply` too, but because we are not modifying any resources no changes will be applied anyway.
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub. 
+
+<Callout type="info" emoji="ℹ️">
+_Hint_: If you use **_terraform.tfvars_** you don't need to tell Terraform the variable file's name. If you use anything else (**_.tfvars_**) you must use `-var-file`
+</Callout>
+</Steps>

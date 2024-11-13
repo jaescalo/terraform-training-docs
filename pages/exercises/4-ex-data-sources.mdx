@@ -1,0 +1,22 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+<Steps>
+{<h3>New File</h3>}
+Create a Terraform file named **_main.tf_** which contains 3 data sources:
+    - `akamai_group`, referencing a single group. 
+    <Callout type="info" emoji="ℹ️">
+    _Hint_: In techdocs check the [Base IDs](https://techdocs.akamai.com/terraform/docs/common-identifiers) section.
+    </Callout>
+    - `akamai_appsec_configuration`, referencing a single config
+    - `akamai_property`, referencing a single Akamai property
+
+{<h3>Run</h3>}
+Run a `terraform apply`
+
+{<h3>Q&A</h3>}
+What happens?
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub. 
+</Steps>

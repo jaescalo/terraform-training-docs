@@ -1,0 +1,50 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+### Exercise \#1
+<Steps>
+{<h3>New File</h3>}
+Create a terraform file named **_security.tf_** with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
+
+{<h3>Configure</h3>}
+Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `data.akamai_appsec_configuration`.
+
+{<h3>Apply</h3>}
+Run a `terraform apply`
+
+{<h3>Reconfigure</h3>}
+Duplicate the policy resouce and make the necessary modifications to create a new policy. 
+
+{<h3>Apply</h3>}
+Run another `terraform apply`
+
+{<h3>Destroy</h3>}
+Run a `terraform destroy`. What happens?
+
+{<h3>Re-Apply</h3>}
+Re-apply your terraform code to recreate your resources as we may need them later on. 
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub. 
+</Steps>
+
+### Exercise \#2
+<Steps>
+{<h3>New File</h3>}
+Create a terraform file named **_property.tf_** with the following resources:
+  - CP Code: use the resource `akamai_cp_code` to create a new CP code
+  - Edge Hostname: use the resources `akamai_property` resource, cp_code and edge_hostname
+  - Property: use the resources `akamai_property` resource, cp_code and edge_hostname
+
+{<h3>Configure</h3>}
+Observe you'll need to configure a tree for the `akamai_property` too. 
+<Callout type="info" emoji="ℹ️">
+_Hint_: check the `data.akamai_property_rules_builder` data source in Techdocs.
+</Callout>
+
+{<h3>Apply</h3>}
+Run another `terraform apply`
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub.
+</Steps>

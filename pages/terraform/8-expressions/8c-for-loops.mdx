@@ -61,13 +61,8 @@ The main benefits of `for` expressions are:
 
 ---
 
-## Exercises
-1. Create the following variable in your variables.tf:
-```hcl filename="variables.tf" copy
-variable "apps" {
-  default = [ "www", "api", "blog", "shop", "cdn"]
-}
-```
-2. In your main.tf with the use of the `for` expression convert each app name above into a hostname by appending the example.com domain. The new local variable containing the new hostnames list can be named `app_hostnames` and we will use it in later exercises.
-3. Output the `app_hostnames` local to confirm the logic is applied.
-4. Commit your change and push it to GitHub. 
+## Exercise
+
+import ExerciseFor from "../../exercises/8c-ex-for-loops.mdx"
+
+<ExerciseFor />

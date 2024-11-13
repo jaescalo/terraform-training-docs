@@ -17,6 +17,10 @@
   "appendix": {
     "title": "Appendix"
   },
+  "exercises": {
+    "title": "Exercises",
+    "type": "page"
+  },
   "contact": {
     "title": "Contact ↗",
     "type": "page",

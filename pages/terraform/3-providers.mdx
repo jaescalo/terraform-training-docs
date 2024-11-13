@@ -6,9 +6,9 @@ Provider code is written in GoLang (as is Terraform itself) and is beyond the sc
 
 ## Using a provider
 
-In your Terraform code (any .tf file in your code directory), you must declare which providers (and you can use multiple ones) you need, and which version of each provider you wish to use. This is done in the `required_providers` map within the `terraform` configuration block. Then, if required, you can provide configuration options to that provider in its own `provider` block.
+In your Terraform code (any **_.tf_** file in your code directory), you must declare which providers (and you can use multiple ones) you need, and which version of each provider you wish to use. This is done in the `required_providers` map within the `terraform` configuration block. Then, if required, you can provide configuration options to that provider in its own `provider` block.
 
-```hcl filename="provider.tf" copy
+```hcl /required_providers/ /provider/ filename="provider.tf" copy
 terraform {
   required_providers {
     akamai = {
@@ -45,10 +45,8 @@ The following `provider` block configures the Akamai provider. This is dynamic a
 
 ---
 
-## Exercises
+## Exercise
 
-1. Create a file named provider.tf in your local clone of your GitHub repository. Populate it as the example above.
-2. Update the Akamai required version to use the `~>` operator, and specify only the Major and Minor versions, e.g. 1.1, rather than 1.1.0. This means that Terraform will install any minor updates when running `init`, but not the next major version.
-3. Update the `required_version` parameter to the most recently version of Terraform
-4. Run `terraform init`. Which version was installed?
-5. Commit your change and push it to GitHub. 
+import ExerciseProviders from "../exercises/3-ex-providers.mdx"
+
+<ExerciseProviders />

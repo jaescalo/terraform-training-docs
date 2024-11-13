@@ -1,0 +1,15 @@
+import { Steps } from 'nextra/components'
+
+<Steps>
+{<h3>Configure</h3>}
+In your **_main.tf_** create a local named `notes` which could be referenced in different resources later on (e.g. `akamai_appsec_activations`, `akamai_property`).
+
+{<h3>Update</h3>}
+The `notes` local is a joined string containing a ficticious ticket ID (e.g. TF-3001) and the group ID.
+
+{<h3>Validate</h3>}
+Run `terraform validate` to confirm you don't have any sytax errors or missing statements in the code. You could run `terraform plan` or `terraform apply` too, but because we are not modifying any resources no changes will be detected/applied anyway.
+
+{<h3>Commit</h3>}
+Commit your change and push it to GitHub. 
+</Steps>

@@ -1,188 +1,113 @@
 # All Exercises
 
 ## Requirements: Git
-1. Create a new repository for your Terraform projects, set up SSH, clone it locally, make a small change to the README, commit, and push. This will ensure you're ready for the journey ahead!
+import ExerciseGit from "../exercises/1-ex-git.mdx"
+
+<ExerciseGit />
+
 
 ## Module 3: Providers
-1. Create a file named provider.tf in your local clone of your GitHub repository. Populate it as the example above.
-2. Update the Akamai required version to use the `~>` operator, and specify only the Major and Minor versions, e.g. 1.1, rather than 1.1.0. This means that Terraform will install any minor updates when running `init`, but not the next major version.
-3. Update the `required_version` parameter to the most recently version of Terraform
-4. Run `terraform init`. Which version was installed?
-5. Commit your change and push it to GitHub. 
+import ExerciseProviders from "../exercises/3-ex-providers.mdx"
+
+<ExerciseProviders />
+
 
 ## Module 4: Data Sources
-1. Create a Terraform file named main.tf which contains 3 data sources:
-    - `akamai_group`, referencing a single group. _Hint_: In techdocs check the [Base IDs](https://techdocs.akamai.com/terraform/docs/common-identifiers) section.
-    - `akamai_appsec_configuration`, referencing a single config
-    - `akamai_property`, referencing a single Akamai property
-3. Run a `terraform apply`
-2. What happens?
-4. Commit your changes and push them to GitHub. 
+import ExerciseDataSources from "../exercises/4-ex-data-sources.mdx"
+
+<ExerciseDataSources />
+
 
 ## Module 5: Resources
-### Exercise \#1
-1. Create a terraform file named security.tf with an `akamai_appsec_configuration` resource and an `akamai_appsec_security_policy` resource
-2. Configure the `akamai_appsec_security_policy` resource to get its `config_id` from the `data.akamai_appsec_configuration`.
-3. Run a `terraform apply`
-4. Duplicate the policy resouce and make the necessary modifications to create a new policy. 
-5. Run another `terraform apply`
-6. Run a `terraform destroy`. What happens?
-7. Re-apply your terraform code to recreate your resources as we may need them later on. 
-8. Commit your changes and push them to GitHub. 
+import ExerciseResources from "../exercises/5-ex-resources.mdx"
 
-### Exercise \#2
-1. Create a terraform file named property.tf with the following resources:
-  - CP Code: use the resource `akamai_cp_code` to create a new CP code
-  - Edge Hostname: use the resources `akamai_property` resource, cp_code and edge_hostname
-  - Property: use the resources `akamai_property` resource, cp_code and edge_hostname
-2. Observe you'll need to configure a tree for the `akamai_property` too. _Hint_: check the `data.akamai_property_rules_builder` data source in Techdocs.
-3. Run another `terraform apply`
-4. Commit your changes and push them to GitHub. 
+<ExerciseResources />
 
 
 ## Module 6: Outputs
-1. Create a terraform file called outputs.tf
-2. Create outputs with the IDs for all 3 data sources created in the Exercises section in module [4. Data Sources](/terraform/4-data-sources#exercises)
-3. Commit your changes and push them to GitHub. 
+import ExerciseOutputs from "../exercises/6-ex-outputs.mdx"
+
+<ExerciseOutputs />
 
 ## Module 7: Variables
 
 ### Terraform Variables
-1. Create a variables.tf file which declares the variables `edgerc_path` and `config_section`, both of type `string`. Configure these with descriptions and default values
-2. Update your provider.tf file to use these variables in the `provider "akamai"` block
-3. Run `terraform init` and confirm the provider is installed correctly
-4. Run `terraform plan`, providing new values for the 2 variables using the `-var` syntax
-5. Create a terraform.tfvars file and use it to set new values for both variables. Re-run `terraform plan` using this file instead.
-4. Commit your changes and push them to GitHub. 
+import ExerciseVariables from "../exercises/7a-ex-variables.mdx"
 
-> Hint: If you use terraform.tfvars you don't need to tell Terraform the variable file's name. If you use anything else (.tfvars) you must use `-var-file`
+<ExerciseVariables />
 
 ### Locals
-1. In your main.tf create a local named `notes` which could be referenced in different resources later on (e.g. `akamai_appsec_activations`, `akamai_property`).
-2. The `notes` local is a joined string containing a ficticious ticket ID (e.g. TF-3001) and the group ID.
-3. Run terraform.
-4. Commit your change and push it to GitHub. 
+import ExerciseLocals from "../exercises/7b-ex-locals.mdx"
+
+<ExerciseLocals />
 
 ### Environment Variables
-1. Switch to environment variables for the Akamai API Credentials instead of referring to the .edgerc file. 
+import ExerciseEnvVars from "../exercises/7c-ex-env-variables.mdx"
+
+<ExerciseEnvVars />
 
 ## Module 8: Expressions
 
 ### Conditionals
-1. Define a new variable named `ab_test` and give it a default value of `"A"`. 
-2. In your property created in the Exercise #2 in module [5. Resources](/terraform/5-resources#exercise-2) create a condition for the origin name based on the variable `ab_test`. That is if `ab_test="A"` go to Origin A (e.g. origin-a.example.com), else go to Origin B (e.g. origin-b.example.com).
-3. Run terraform a few times and modify the value of `ab_test` each time. 
-4. Commit your change and push it to GitHub. 
+import ExerciseConditionals from "../exercises/8b-ex-conditionals.mdx"
+
+<ExerciseConditionals />
 
 ### `for` Expressions
-1. Create the following variable in your variables.tf:
-```hcl filename="variables.tf" copy
-variable "apps" {
-  default = [ "www", "api", "blog", "shop", "cdn"]
-}
-```
-2. In your main.tf with the use of the `for` expression convert each app name above into a hostname by appending the example.com domain. The new local variable containing the new hostnames list can be named `app_hostnames` and we will use it in later exercises.
-3. Output the `app_hostnames` local to confirm the logic is applied.
-4. Commit your change and push it to GitHub. 
+import ExerciseFor from "../exercises/8c-ex-for-loops.mdx"
+
+<ExerciseFor />
 
 ### Dynamic Blocks
-- At this point you should have a property.tf file that creates a property with a single hostname. If not review the Exercise #2 in module [5. Resources](/terraform/5-resources#exercise-2).
+import ExerciseDynamic from "../exercises/8d-ex-dynamic-blocks.mdx"
 
-- You should also have a list of hostnames in a local variable named `apps_hostnames` from the previous exercise in module [For Expressions](/terraform/8c-for-loops#exercises).
-
-1. Add a `dynamic` block in the `akamai_property` resource to add all the hostnames in the `apps_hostnames` list to the property. The hostnames can share the same edge hostname and other required parameters.
-2. Run terraform
-3. Commit your change and push it to GitHub. 
+<ExerciseDynamic />
 
 ## Module 9: Meta-Arguments
 
 ### `depends_on`
-1. Add 2 `akamai_property_activation` resources to your property.tf. One for the staging network and the other one for the production network. _Hint_: You can use the `local.notes` defined in the Exercises section in module [7. Terraform Locals](/terraform/7-variables/7b-locals#exercises)
-2. Add a `depends_on` to the production activation resource so that the production activation doesn't start until the staging activation has completed.
-3. Run terraform
-4. Commit your change and push it to GitHub. 
+import ExerciseDependsOn from "../exercises/9a-ex-depends-on.mdx"
 
-Although this is not a real use case it shows how the order of the resources updates/creations can be somewhat controlled.
+<ExerciseDependsOn />
 
 ### `count`
-- You should have a list of hostnames in a local variable named `apps_hostnames` from the previous exercise in module [For Expressions](/terraform/8c-for-loops#exercises).
+import ExerciseCount from "../exercises/9b-ex-count.mdx"
 
-1. Create a new dns.tf file and add the `akamai_dns_record` resource.
-2. Using `count` configure `akamai_dns_record` to create as many CNAME records as entries in `apps_hostnames`.
-3. Run terraform
-4. Commit your change and push to GitHub. 
+<ExerciseCount />
 
 ### `for_each`
-1. Create the following variable in your variables.tf:
-```hcl filename="variables.tf" copy
-variable "dns_records" {
-  default = {
-    "orgigin1" = {
-      zone       = "example.com"
-      recordType = "A"
-      ttl        = 60
-      target     = "172.233.190.92"
-      name       = "origin-www.example.com"
-    },
-    "origin2" = {
-      zone       = "example.com"
-      recordType = "A"
-      ttl        = 100
-      target     = "173.233.190.93"
-      name       = "origin-api.example.com"
-    },
-    "origin3" = {
-      zone       = "example.com"
-      recordType = "A"
-      ttl        = 600
-      target     = "174.233.190.94"
-      name       = "origin-blog.example.com"
-    }
-  }
-}
-```
-2. In your dns.tf with the use of the `for_each` meta-argument and a single `akamai_dns_record` resource block create all 3 DNS records from the `dns_records` variable above. The values for all the arguments must be Terraform expressions.
-3. Run terraform
-4. Commit your change and push it to GitHub. 
+import ExerciseForEach from "../exercises/9c-ex-for-each.mdx"
+
+<ExerciseForEach />
 
 ### `lifecycle`
-1. Add lifecyle `ignore_changes` to both of the 2 `akamai_property_activation` resources in your property.tf to prevent changes to the notes to trigger activations. 
-2. Run terraform
-3. Make a change to the `note` argument and run Terraform again. What happens?
-4. Commit your change and push it to GitHub. 
+import ExerciseLifecycle from "../exercises/9d-ex-lifecycle.mdx"
+
+<ExerciseLifecycle />
 
 ## Module 10: Built-In Functions
-1. In your main.tf create 3 local variables.
-2. Use at least one built-in function on each variable to change its value.
-3. Create outputs for the values and run `terraform plan` to print them to the shell. Although not necessary, but for standardization remember to add your outputs to your outputs.tf file.
+import ExerciseBuiltIn from "../exercises/10-ex-built-in-functions.mdx"
+
+<ExerciseBuiltIn />
 
 ## Module 11: Terraform Modules
-### Exercise \#1
-1. Create a new directory named modules, and inside it a sub-directory named edgeworkers. So you end up with ./modules/edgeworkers
-2. In your ./modules/edgeworkers create all the necessary *.tf files to create a new EdgeWorker ID. Make sure that the `name`, `group_id` and `resource_tier_id` are parameters that can be set by the root module.
-3. Back in your root directory create a new edgeworkers.tf file and add the necessary Terraform code to call the EdgeWorkers module. 
-4. Run Terraform. Why do you need to run a `terraform init`?
-5. After running the `terraform init` try to run Terraform again. What happened? _Hint_: remember to define the `akamai` provider in the child modules.
-6. Run Terraform again. 
-7. Commit your changes and push them to GitHub. 
+import ExerciseModules from "../exercises/11-ex-modules.mdx"
 
-### Exercise \#2
-1. In your property.tf you should have the rule tree defined in a `data.akamai_property_rules_builder`. Convert this data source to a Terraform module instead. 
-  - Create a new directory inside the modules directory and name it rules. So ./modules/rules
-  - Add all the necessary child module *.tf files inside this directory.
-
-_Hint_: remember to create the variables.tf with any of the parameters needed for your rule tree. If you've been following along you should have 2 parameters in the rule tree: `ab_test` for the origin selection and the `akamai_cp_code.my_cp_code.id`. These 2 values will be arguments when you call the module. 
-
-2. Use your new child module in you property.tf to build the rule tree and update the `akamai_property` accordingly.
-
-_Hint_: remember that the `akamai_property` resource requires the `rule_format` and `rules` argument which should be updated with the expression to reference the newly created module. Also keep in mind that you need to define these values as outputs in the child module.
-
-3. Run Terraform 
-4. Commit your changes and push them to GitHub. 
+<ExerciseModules />
 
 
 ## Module 12: State File
+import ExerciseStateStorage from "../exercises/12-ex-state-storage.mdx"
+
+<ExerciseStateStorage />
 
 ## Module 13: Terraform Imports
+import ExerciseImports from "../exercises/13-ex-imports.mdx"
+
+<ExerciseImports />
+
 
 ## Module 14: Troubleshooting
+import ExerciseTroubleshooting from "../exercises/14-ex-troubleshooting.mdx"
+
+<ExerciseTroubleshooting />

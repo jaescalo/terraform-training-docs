@@ -77,36 +77,8 @@ The main difference between `count` and `for_each` in Terraform is the way they 
 
 ---
 
-## Exercises
+## Exercise
 
-1. Create the following variable in your variables.tf:
-```hcl filename="variables.tf" copy
-variable "dns_records" {
-  default = {
-    "orgigin1" = {
-      zone       = "example.com"
-      recordType = "A"
-      ttl        = 60
-      target     = "172.233.190.92"
-      name       = "origin-www.example.com"
-    },
-    "origin2" = {
-      zone       = "example.com"
-      recordType = "A"
-      ttl        = 100
-      target     = "173.233.190.93"
-      name       = "origin-api.example.com"
-    },
-    "origin3" = {
-      zone       = "example.com"
-      recordType = "A"
-      ttl        = 600
-      target     = "174.233.190.94"
-      name       = "origin-blog.example.com"
-    }
-  }
-}
-```
-2. In your dns.tf with the use of the `for_each` meta-argument and a single `akamai_dns_record` resource block create all 3 DNS records from the `dns_records` variable above. The values for all the arguments must be Terraform expressions.
-3. Run terraform
-4. Commit your change and push it to GitHub. 
+import ExerciseForEach from "../../exercises/9c-ex-for-each.mdx"
+
+<ExerciseForEach />
