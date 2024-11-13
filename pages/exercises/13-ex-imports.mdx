@@ -1,7 +1,29 @@
-1. Create a new gtm.tf file and add the `akamai_gtm_domain` resource with all the necessary parameters for the domain you want to import. 
-2. Run a `terraform plan`. Is Terraform going to add a new GTM domain or reuse the existing one at this point?
-3. Run a `terraform state list` and look for the `akamai_gtm_domain` resource. Did you find it? Why not?
-4. Import the GTM domain into Terraform's state file. **_Hint_**: refer to the `akamai_gtm_domain` resource documentation in [Techdocs](https://techdocs.akamai.com/terraform/docs/gtm-rc-domain). You could also use the Akamai CLI to export a GTM domain.
-5. Run a `terraform state list` command to verify the new resource has been succeessfuly imported to the state file.
-6. Run another `terraform plan`. What happens now?
-7. Commit your changes and push them to GitHub. 
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+<Steps>
+{<h3>New File</h3>}
+Create a new **_gtm.tf_** file and add the `akamai_gtm_domain` resource with all the necessary parameters for the domain you want to import. 
+
+{<h3>Plan</h3>}
+Run a `terraform plan`. Is Terraform going to add a new GTM domain or reuse the existing one at this point?
+
+{<h3>State</h3>}
+Run a `terraform state list` and look for the `akamai_gtm_domain` resource. Did you find it? Why not?
+
+{<h3>Import</h3>}
+Import the GTM domain into Terraform's state file. 
+
+<Callout type="info" emoji="ℹ️">
+_Hint_: refer to the `akamai_gtm_domain` resource documentation in [Techdocs](https://techdocs.akamai.com/terraform/docs/gtm-rc-domain). You could also use the Akamai CLI to export a GTM domain.
+</Callout>
+
+{<h3>Check the State</h3>}
+Run a `terraform state list` command to verify the new resource has been succeessfuly imported to the state file.
+
+{<h3>Plan</h3>}
+Run another `terraform plan`. What happens now?
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub. 
+</Steps>

@@ -1,3 +1,15 @@
-1. In your main.tf create 3 local variables.
-2. Use at least one built-in function on each variable to change its value.
-3. Create outputs for the values and run `terraform plan` to print them to the shell. Although not necessary, but for standardization remember to add your outputs to your outputs.tf file.
+import { Steps } from 'nextra/components'
+
+<Steps>
+{<h3>Configure</h3>}
+In your **_main.tf_** create 3 local variables.
+
+{<h3>Update</h3>}
+Use at least one built-in function on each variable to change its value.
+
+{<h3>Outputs</h3>}
+Create outputs for the values. Although not necessary, but for standardization remember to add your outputs to your **_outputs.tf_** file.
+
+{<h3>Plan/Apply</h3>}
+Run `terraform plan` to show the outputs in the terminal. You can also run `terraform apply` and that will save the outputs to the Terraform state file.
+</Steps>

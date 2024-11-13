@@ -1,11 +1,5 @@
 # All Exercises
 
-## Requirements: Git
-import ExerciseGit from "../exercises/1-ex-git.mdx"
-
-<ExerciseGit />
-
-
 ## Module 3: Providers
 import ExerciseProviders from "../exercises/3-ex-providers.mdx"
 
@@ -111,3 +105,38 @@ import ExerciseImports from "../exercises/13-ex-imports.mdx"
 import ExerciseTroubleshooting from "../exercises/14-ex-troubleshooting.mdx"
 
 <ExerciseTroubleshooting />
+
+## Project Structure
+For reference only, if you followed along and completed all the exercises you will end up with a project structure similar to the following:
+
+import { FileTree } from 'nextra/components'
+
+<FileTree>
+  <FileTree.Folder name="terraform-project" defaultOpen>
+    <FileTree.Folder name=".terraform" />
+    <FileTree.File name="dns.tf" />
+    <FileTree.File name="edgeworkers.tf" />
+    <FileTree.File name="gtm.tf" />
+    <FileTree.File name="main.tf" />
+    <FileTree.File name="outputs.tf" />
+    <FileTree.File name="property.tf" />
+    <FileTree.File name="providers.tf" />
+    <FileTree.File name="security.tf" />
+    <FileTree.File name="terraform.tfstate" />
+    <FileTree.File name="terraform.tfvars" />
+    <FileTree.File name="variables.tf" />
+    <FileTree.Folder name="modules" defaultOpen>
+      <FileTree.Folder name="edgeworkers" defaultOpen>
+        <FileTree.File name="edgeworkers.tf" />
+        <FileTree.File name="providers.tf" />
+        <FileTree.File name="variables.tf" />
+      </FileTree.Folder>
+      <FileTree.Folder name="rules" defaultOpen>
+        <FileTree.File name="outputs.tf" />
+        <FileTree.File name="providers.tf" />
+        <FileTree.File name="rules.tf" />
+        <FileTree.File name="variables.tf" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>

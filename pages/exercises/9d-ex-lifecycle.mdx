@@ -1,4 +1,18 @@
-1. Add lifecyle `ignore_changes` to both of the 2 `akamai_property_activation` resources in your property.tf to prevent changes to the notes to trigger activations. 
-2. Run terraform
-3. Make a change to the `note` argument and run Terraform again. What happens?
-4. Commit your change and push it to GitHub. 
+import { Steps } from 'nextra/components'
+
+<Steps>
+{<h3>Configure</h3>}
+Add lifecyle `ignore_changes` to both of the 2 `akamai_property_activation` resources in your **_property.tf_** to prevent changes to the notes to trigger activations. 
+
+{<h3>Plan/Apply</h3>}
+Run terraform
+
+{<h3>Update</h3>}
+Make a change to the `note` argument.
+
+{<h3>Plan/Apply</h3>}
+Run Terraform again. What happens?
+
+{<h3>Commit</h3>}
+Commit your change and push it to GitHub. 
+</Steps>

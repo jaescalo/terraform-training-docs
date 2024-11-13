@@ -1,20 +1,27 @@
+import { Steps } from 'nextra/components'
+
 # 13. Import to Terraform
 
 Terraform import allows you to bring existing infrastructure resources under Terraform management. Here's how it works:
 
-1. First, you write a resource configuration block in your Terraform code that matches the resource you want to import.
+<Steps>
+{<h3>Prepare</h3>}
+First, you write a resource configuration block in your Terraform code that matches the resource you want to import.
 
-2. Then you use the `terraform import` command with the syntax:
+{<h3>Import</h3>}
+Then you use the `terraform import` command with the syntax:
 
 ```shell copy
 terraform import [resource_type].[resource_instance] [resource_id]
 ```
 The `resource_id`is resource-specific. You can find the required ID in the provider documentation for the resource you wish to import.
 
-3. Terraform will:
+{<h3>Result</h3>}
+Terraform will:
     * Find the existing resource
     * Add it to your state file
     * Allow you to manage it going forward with Terraform
+</Steps>
 
 ## Example
 Let's assume we have a Cloudlet policy deployed and we want to manage it in Terraform going forward. The first step is to add the resource to the Terraform code:

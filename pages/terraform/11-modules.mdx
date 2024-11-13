@@ -1,3 +1,5 @@
+import { FileTree } from 'nextra/components'
+
 # 11. Modules
 
 Terraform modules are reusable, self-contained packages of Terraform configurations that encapsulate a set of resources with a specific purpose. A module consists of a collection of _.tf_ files kept together in a directory (commonly under ./modules/). 
@@ -12,22 +14,24 @@ A Terraform module (usually the root module of a configuration) can call other m
 
 Child modules can be called multiple times within the same configuration, and multiple configurations can use the same module. The recommended convention is to store all your children modules in a directory named ./modules/. For example you have created a module for creating CPS (Certificate Provisioning System) enrollments:
 
-```text {6-7}
-# Basic module structure
-terraform-project/
-  ├── main.tf         # Main configuration file
-  ├── variables.tf    # Input variables
-  ├── outputs.tf      # Output values
-  ├── providers.tf    # Providers configurations
-  └── modules/        # Directory for your modules
-      └── cps/
-          ├── main.tf
-          ├── variables.tf
-          ├── providers.tf
-          └── outputs.tf
-```
+<FileTree>
+  <FileTree.Folder name="terraform-project" defaultOpen>
+    <FileTree.File name="main.tf" />
+    <FileTree.File name="outputs.tf" />
+    <FileTree.File name="providers.tf" />
+    <FileTree.File name="variables.tf" />
+    <FileTree.Folder name="modules" defaultOpen>
+      <FileTree.Folder name="cps" defaultOpen>
+        <FileTree.File name="main.tf" />
+        <FileTree.File name="outputs.tf" />
+        <FileTree.File name="providers.tf" />
+        <FileTree.File name="variables.tf" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
 
-If you also noted from the above structure, the providers.tf may also need to be defined at the child module level. Although any parameters for the provider will be passed by the root module so no need to re-define all the provider parameters.
+If you also noted from the above structure, the **_providers.tf_** may also need to be defined at the child module level. Although any parameters for the provider will be passed by the root module so no need to re-define all the provider parameters.
 
 It may not come by surprise at this point that the Terraform code you've created (root module) so far can be used as a child module with little or no changes at all.
 
@@ -44,7 +48,7 @@ module "cert_enrollment" {
 ```
 
 **Key Components:**
-* The label immediately after the `module` keyword is a local name (cert_enrollment in above's example), which the calling module can use to refer to this instance of the module.
+* The label immediately after the `module` keyword is a local name (`cert_enrollment` in above's example), which the calling module can use to refer to this instance of the module.
 * Source: Where the module code lives (local path in this case but it could also be a Git repo or Terraform Registry)
 * Input Variables: Parameters you can pass to customize the module. These parameters must exist as variables in the child module.
 * Resources: The `my-module` contains the resources.

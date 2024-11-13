@@ -1,22 +1,58 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
 ### Exercise \#1
-1. Create a new directory named modules, and inside it a sub-directory named edgeworkers. So you end up with ./modules/edgeworkers
-2. In your ./modules/edgeworkers create all the necessary *.tf files to create a new EdgeWorker ID. Make sure that the `name`, `group_id` and `resource_tier_id` are parameters that can be set by the root module.
-3. Back in your root directory create a new edgeworkers.tf file and add the necessary Terraform code to call the EdgeWorkers module. 
-4. Run Terraform. Why do you need to run a `terraform init`?
-5. After running the `terraform init` try to run Terraform again. What happened? _Hint_: remember to define the `akamai` provider in the child modules.
-6. Run Terraform again. 
-7. Commit your changes and push them to GitHub. 
+
+<Steps>
+{<h3>New Directory</h3>}
+Create a new directory named **_modules_**, and inside it a sub-directory named **_edgeworkers_**. So you end up with **_./modules/edgeworkers_**.
+
+{<h3>New Module</h3>}
+In your **_./modules/edgeworkers_** create all the necessary **_*.tf_** files to create a new EdgeWorker ID. Make sure that the `name`, `group_id` and `resource_tier_id` are parameters that can be set by the root module.
+
+{<h3>New File</h3>}
+Back in your root directory create a new **_edgeworkers.tf_** file and add the necessary Terraform code to call the EdgeWorkers module. 
+
+{<h3>Plan</h3>}
+Run a `terraform plan`. Why do you need to run a `terraform init`?
+
+{<h3>Init</h3>}
+After running the `terraform init` try to run the `terrform plan` again. What happened?
+
+<Callout type="info" emoji="ℹ️">
+_Hint_: remember to define the `akamai` provider in the child modules.
+</Callout>
+
+{<h3>Plan/Apply</h3>}
+After defining the provider in your child module run `terraform plan` and `terraform apply`. 
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub. 
+</Steps>
+
 
 ### Exercise \#2
-1. In your property.tf you should have the rule tree defined in a `data.akamai_property_rules_builder`. Convert this data source to a Terraform module instead. 
-  - Create a new directory inside the modules directory and name it rules. So ./modules/rules
-  - Add all the necessary child module *.tf files inside this directory.
 
-_Hint_: remember to create the variables.tf with any of the parameters needed for your rule tree. If you've been following along you should have 2 parameters in the rule tree: `ab_test` for the origin selection and the `akamai_cp_code.my_cp_code.id`. These 2 values will be arguments when you call the module. 
+<Steps>
+{<h3>Configure</h3>}
+In your **_property.tf_** you should have the rule tree defined in a `data.akamai_property_rules_builder`. Convert this data source to a Terraform module instead. 
+  - Create a new directory inside the **_modules_** directory and name it **_rules_**. So **_./modules/rules_**
+  - Add all the necessary child module **_*.tf_** files inside this directory.
 
-2. Use your new child module in you property.tf to build the rule tree and update the `akamai_property` accordingly.
+<Callout type="info" emoji="ℹ️">
+_Hint_: remember to create the **_variables.tf_** with any of the parameters needed for your rule tree. If you've been following along you should have 2 parameters in the rule tree: `ab_test` for the origin selection and the `akamai_cp_code.my_cp_code.id`. These 2 values will be arguments when you call the module. 
+</Callout>
 
+{<h3>Update</h3>}
+Use your new child module in you **_property.tf_** to build the rule tree and update the `akamai_property` accordingly.
+
+<Callout type="info" emoji="ℹ️">
 _Hint_: remember that the `akamai_property` resource requires the `rule_format` and `rules` argument which should be updated with the expression to reference the newly created module. Also keep in mind that you need to define these values as outputs in the child module.
+</Callout>
 
-3. Run Terraform 
-4. Commit your changes and push them to GitHub. 
+{<h3>Plan/Apply</h3>}
+Run Terraform.
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub. 
+</Steps>

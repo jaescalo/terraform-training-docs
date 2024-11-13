@@ -1,7 +1,20 @@
+import { Steps } from 'nextra/components'
+
 This is an optional but highly encourage exercise. If you don't have access to Linode Object Storage you can configure any other compatible remote backend.
 
-1. In Linode setup an Object Storage (S3) bucket to store the state file. 
-2. If you don't have the necessary access credentials follow the instructions in the [Linode API Requirements](/requirements/linode-api) section. 
-3. Configure Terraform to store the state file in the remote backend.
-4. Run Terraform 
-5. Commit your changes and push them to GitHub. 
+<Steps>
+{<h3>New S3 Bucket</h3>}
+In Linode setup an Object Storage (S3) bucket to store the state file. 
+
+{<h3>API Access</h3>}
+If you don't have the necessary access credentials follow the instructions in the [Linode API Requirements](/requirements/linode-api) section. 
+
+{<h3>Configure</h3>}
+Configure Terraform to store the state file in the remote backend.
+
+{<h3>Init</h3>}
+Run `terraform init --reconfigure` to apply the new backend configuration.
+
+{<h3>Commit</h3>}
+Commit your changes and push them to GitHub. 
+</Steps>

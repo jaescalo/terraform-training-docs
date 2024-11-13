@@ -1,6 +1,24 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+- You need an existing EdgeDNS zone where you can make changes. If you don't have an EdgeDNS zone, then create one outside of Terraform (we'll explain why in a bit). Chose any domain of your preference for the new EdgeDNS zone.
+
 - You should have a list of hostnames in a local variable named `apps_hostnames` from the previous exercise in module [For Expressions](/terraform/8c-for-loops#exercises).
 
-1. Create a new dns.tf file and add the `akamai_dns_record` resource.
-2. Using `count` configure `akamai_dns_record` to create as many CNAME records as entries in `apps_hostnames`.
-3. Run terraform
-4. Commit your change and push to GitHub. 
+<Steps>
+{<h3>New File</h3>}
+Create a new **_dns.tf_** file and add the `akamai_dns_record` resource. Remember that the DNZ zone `name` must match your already deployed zone name.
+
+{<h3>Configure</h3>}
+Using `count` configure `akamai_dns_record` to create as many CNAME records as entries in `apps_hostnames`.
+
+{<h3>Plan/Apply</h3>}
+Run `terraform plan` to confirm your changes. Run `terraform apply` if all looks in order.
+
+<Callout type="info" emoji="ℹ️">
+As you can notice, Terraform will create the DNS records in the zone even if the zone is not managed by Terraform. The DNS records and zone are independent resources. This allows to manage only specific resources as code.
+</Callout>
+
+{<h3>Commit</h3>}
+Commit your change and push to GitHub. 
+</Steps>

@@ -1,4 +1,8 @@
-1. Create the following variable in your variables.tf:
+import { Steps } from 'nextra/components'
+
+<Steps>
+{<h3>Update</h3>}
+Create the following variable in your **_variables.tf_**:
 ```hcl filename="variables.tf" copy
 variable "dns_records" {
   default = {
@@ -26,6 +30,13 @@ variable "dns_records" {
   }
 }
 ```
-2. In your dns.tf with the use of the `for_each` meta-argument and a single `akamai_dns_record` resource block create all 3 DNS records from the `dns_records` variable above. The values for all the arguments must be Terraform expressions.
-3. Run terraform
-4. Commit your change and push it to GitHub. 
+
+{<h3>Configure</h3>}
+In your dns.tf with the use of the `for_each` meta-argument and a single `akamai_dns_record` resource block create all 3 DNS records from the `dns_records` variable above. The values for all the arguments must be Terraform expressions.
+
+{<h3>Plan/Apply</h3>}
+Run terraform
+
+{<h3>Commit</h3>}
+Commit your change and push it to GitHub. 
+</Steps>
