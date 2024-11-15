@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Git Basics: Essential Skills for Your Terraform Journey
 
 Before we dive into Terraform, let's ensure you're comfortable with Git. This version control system will be crucial for managing your infrastructure code and collaborating with others.
@@ -7,18 +9,25 @@ Before we dive into Terraform, let's ensure you're comfortable with Git. This ve
 Git allows you to track changes in your code over time. Let's start by creating a new repository:
 
 1. Navigate to [GitHub](https://github.com) and log in or create a new account if you don't have one. 
-2. Click the '+' icon in the top-right corner and select 'New repository'.
-3. Name your repository (e.g., 'terraform-training').
-4. Choose 'Public' or 'Private' visibility.
-5. Check 'Add a README file'.
-6. Under Add .gitignore select Terraform
-6. Click 'Create repository'.
+2. Click the **+** icon in the top-right corner and select **New repository**.
+3. Name your repository (e.g., **terraform-training**).
+4. Choose **Public** visibility.
+
+<Callout type="warning" emoji="⚠️">
+**Important:** Do not commit any sensitive data to the repository as a best practice whether it is Public or Private. 
+</Callout>
+
+5. Check **Add a README file**.
+6. Under **Add .gitignore** select Terraform
+6. Click **Create repository**.
 
 ![Creating a new GitHub repository](/requirements-git-new-repo.jpeg)
 
 ## 2. Setting Up SSH Keys
 
-> Note: If you are a Windows user, make sure to run the commands below in PowerShell, rather the Cmd Prompt. You do not need "Run as Administrator" unless specified
+<Callout type="info" emoji="ℹ️">
+**Note**: If you are a Windows user, make sure to run the commands below in PowerShell, rather the Cmd Prompt. You do not need "Run as Administrator" unless specified
+</Callout>
 
 SSH keys provide a secure way to connect with GitHub:
 
@@ -87,7 +96,9 @@ As you work on your Terraform configurations, you'll need to commit your changes
     ```bash copy
     git commit -m "Add initial Terraform configuration"
 
-> 💡 **Tip:** Write clear, concise commit messages to document your work effectively.
+<Callout emoji="💡">
+**Tip:** Write clear, concise commit messages to document your work effectively.
+</Callout>
 
 ## 5. Pushing Your Changes
 Finally, let's push your local commits to GitHub:
