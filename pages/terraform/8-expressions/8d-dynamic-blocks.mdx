@@ -31,7 +31,7 @@ resource "akamai_property" "my_property" {
 
 The `hostnames` nested block is repeated as many times as hostnames. Instead a `dynamic` block can be used to avoid repetition:
 
-```hcl filename="main.tf" copy {7,8,9}
+```hcl /dynamic/ filename="main.tf" copy {7,8,9}
 variable "hostnames" {
   default = ["www.example.com", "api.example.com", "blog.example.com"]
 }

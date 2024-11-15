@@ -6,7 +6,7 @@ Here are some common use cases with simple examples:
 
 ## Creating a new list from an existing list
 Convert a list of domains into edge hostnames.
-```hcl filename="main.tf" copy {7}
+```hcl /for/ filename="main.tf" copy {7}
 variable "domains" {
   default = ["example.com", "api.example.com"]
 }
@@ -22,7 +22,7 @@ locals {
 
 ## Creating a map from a list
 Converting a list of hostnames into a map containing the respective edge hostnames.
-```hcl filename="main.tf" copy {3}
+```hcl /for/ filename="main.tf" copy {3}
 locals {
   edge_hostnames = {for domain in var.domains : "${domain}" => "${domain}.edgesuite.net"}
   # Result: {
@@ -34,7 +34,7 @@ locals {
 
 ## Filtering items
 Filter out the example.com domain from the list.
-```hcl filename="main.tf" copy {7}
+```hcl /for/ filename="main.tf" copy {7}
 variable "all_names" {
   default = ["example.com", "api.example.com", "www.example.com"]
 }

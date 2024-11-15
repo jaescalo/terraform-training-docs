@@ -29,7 +29,11 @@ The `default` element gives your variable a default value, should no value be pr
 
 Variables can also be marked as `sensitive` (which prevents them being outputted), `nullable` such that they can accept `null` as a value, and have `validation` blocks to check values.
 
-> Note: While you can use any .tf file to hold your variable definitions, it is common to collect them together into a file named `variables.tf`. This makes finding, changing and adding new variables across your whole folder easier.
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">
+_Note_: While you can use any **_.tf_** file to hold your variable definitions, it is common to collect them together into a file named `variables.tf`. This makes finding, changing and adding new variables across your whole folder easier.
+</Callout>
 
 ## Assignment
 
