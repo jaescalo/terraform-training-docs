@@ -7,7 +7,7 @@ Outputs are a way to print data to the shell after a Terraform run, or to pass d
 In its simplest form, and output looks like this
 
 ```hcl
-output "property id" {
+output "property_id" {
     value = akamai_property.my_property.id
 }
 ```
@@ -17,7 +17,7 @@ Here, the value is inferred from a resource (which is the norm), but if you wish
 Outputs can also contain the keywords `description` and `sensitive`. A `description` is purely to help the reader understand the purpose of the output, by `sensitive` can be used to suppress values from the output of `terraform plan` and `terraform apply`.
 
 ```hcl
-output "property id" {
+output "property_id" {
     value = akamai_property.my_property.id
     description = "The ID of my property"
     sensitive = true
