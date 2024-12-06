@@ -35,9 +35,9 @@ Commit your changes and push them to GitHub.
 <Steps>
 {<h3>New File</h3>}
 Create a terraform file named **_property.tf_** with the following resources:
-  - CP Code: use the resource `akamai_cp_code` to create a new CP code with the `name`, `contract_id`, `group_id`, `product_id` arguements
-  - Edge Hostname: use the resource `akamai_edge_hostname` to create a new CP code with the `contract_id`, `group_id`, `product_id`, `ip_behavior` and `edge_hostname` arguements
-  - Property: use the resources `akamai_property` resource, cp_code and edge_hostname with the `name`, `contract_id`, `group_id`, `product_id` arguements
+  - CP Code: use the resource `akamai_cp_code` to create a new CP code with the `name`, `contract_id`, `group_id`, `product_id` arguments
+  - Edge Hostname: use the resource `akamai_edge_hostname` to create a new Edge Hostname using the required arguments according to the Akamai provider documentation. 
+  - Property: use the resource `akamai_property` to create a new property using the required arguments according to the Akamai provider documentation. 
 
 {<h3>Configure</h3>}
 Observe you'll need to configure `hostnames`, `rules` and `rule_format` for the `akamai_property` too.
