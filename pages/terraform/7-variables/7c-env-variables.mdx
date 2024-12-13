@@ -4,19 +4,36 @@ Environment variables are set at the OS or platform level and made available to 
 
 ## TF_LOG
 For example the `TF_LOG` environment variable enables detailed logs to appear on stderr which is useful for debugging. For example:
+
+**_MacOS_**
 ```shell copy
 export TF_LOG=trace
 ```
+
+
 To disable, either unset it, or set it to off. For example:
+
+**_MacOS_**
 ```shell copy
 export TF_LOG=off
+```
+**_Windows_**
+```powershell copy
+$env:TF_LOG = "off"
 ```
 
 ## TF_VAR_*
 Another very helpful Terraform environment variable is `TF_VAR_name`. This environment variable can be used to set variables in Terraform where the `name` suffix is replaced with the name of your Terraform variable. For example:
+
+**_MacOS_**
 ```shell copy
 export TF_VAR_environment=prod
 ```
+**_Windows_**
+```powershell copy
+$env:TF_VAR_environment = "prod"
+```
+
 The variable must be defined in Terraform for this to work, and a default value can be set as a fail safe in case the variable is not set as an environment variable: 
 ```hcl filename="variables.tf" copy {1,4}
 variable "environment" {
@@ -40,11 +57,11 @@ A very common use of this environment variables is to set the Akamai API credent
     **_Windows_**
     - Right-click Start Menu, select "Windows Powershell (Admin)"
     ```powershell copy
-    $env:TF_VAR_akamai_client_secret="abc123"
-    $env:TF_VAR_akamai_host="abc123.luna.akamaiapis.net"
-    $env:TF_VAR_akamai_access_token="abc123"
-    $env:TF_VAR_akamai_client_token="abc123"
-    $env:TF_VAR_akamai_account_key="1-23ABC"
+    $env:TF_VAR_akamai_client_secret = "abc123"
+    $env:TF_VAR_akamai_host = "abc123.luna.akamaiapis.net"
+    $env:TF_VAR_akamai_access_token = "abc123"
+    $env:TF_VAR_akamai_client_token = "abc123"
+    $env:TF_VAR_akamai_account_key = "1-23ABC"
     ```
 If you're not working with more than one account disregard the `TF_VAR_akamai_account_key` and `account_key` below.
 
