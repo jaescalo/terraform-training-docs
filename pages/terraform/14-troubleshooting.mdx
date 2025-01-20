@@ -34,8 +34,39 @@ export AKAMAI_HTTP_TRACE_ENABLED=true
 $env:AKAMAI_HTTP_TRACE_ENABLED = "true"
 ```
 
+## Akamai APIs
+Keep in mind that the Akamai Terraform Provider is performing API calls behind the scenes. For more complex issues where the Akamai Trace Log is not showing sufficient data you can rely on the API calls. From the Trace Log you can pull information such as the API endpoint, payload, headers, query parameters, etc, and in turn you can perform the same API call outside of the Terraform. This will usually give you more information about the error.
+
 ## Akamai Provider Code
-Sometimes when the documentation is not enough you may need to dig into the [Akamai provider's code](https://github.com/akamai/terraform-provider-akamai). The cdoe is writen in Go.  
+Sometimes when the documentation is not enough you may need to dig into the [Akamai provider's code](https://github.com/akamai/terraform-provider-akamai). 
+
+For example, you want to check the a resource's schema, say the `akamai_property` resource. You would check the file `/pkg/providers/property/resources_akamai_property.go`. The code is written in Go.  
+
+```go
+Schema: map[string]*schema.Schema{
+    // More lines of code ... 
+    "rule_format": {
+        Type:             schema.TypeString,
+        Optional:         true,
+        Computed:         true,
+        Description:      "Specify the rule format version (defaults to latest version available when created)",
+        ValidateDiagFunc: tf.ValidateRuleFormatAcceptLatest,
+    },
+    "version_notes": {
+        Type:             schema.TypeString,
+        Optional:         true,
+        Computed:         true,
+        Description:      "Property version notes",
+        DiffSuppressFunc: propertyVersionNotesDiffSuppress,
+    },
+    "hostnames": {
+        Type:     schema.TypeSet,
+        Optional: true,
+        Set:      hashHostname,
+        // More lines of code ... 
+    }
+}
+```
 
 ## Exercise
 
