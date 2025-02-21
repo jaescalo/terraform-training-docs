@@ -1,14 +1,5 @@
 {
-  "multi-environments": { 
-    "title": "Multiple Environments" 
-  },
-  "onboarding": { 
-    "title": "Domain Onboarding" 
-  },
-  "ci-cd": { 
-    "title": "CI/CD" 
-  },
-  "best-practices": { 
-    "title": "Akamai Specific Best Practices" 
+  "akamai-examples": {
+    "title": "Akamai Examples"
   }
 }
