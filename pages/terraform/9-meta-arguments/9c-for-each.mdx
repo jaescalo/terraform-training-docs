@@ -1,9 +1,11 @@
+import { Callout } from 'nextra/components'
+
 # The for_each Meta-Argument
 
 The `for_each` meta-argument accepts a map or a set of strings, and creates an instance for each item in that map or set. Each instance has a distinct infrastructure object associated with it, and each is separately created, updated, or destroyed when the configuration is applied.
 
 ## Example
-In this case, the for_each meta-argument is used to create multiple DNS records based on a map of DNS records defined in the dns_records variable.
+In this case, the `for_each` meta-argument is used to create multiple DNS records based on a map of DNS records defined in the dns_records variable.
 
 ```hcl filename="variables.tf" copy
 variable "dns_records" {
@@ -46,6 +48,9 @@ Using `each.key` to refer to the instances created by `for_each`:
 akamai_dns_record.my_dns_hostnames["record1"]
 akamai_dns_record.my_dns_hostnames["record2"]
 ```
+<Callout type="info" emoji="ℹ️">
+_Hint_: This is how Terraform references resources under the same block when iterations are used. This means that any state file operations or import operations must follow the syntax.
+</Callout>
 
 Using `each.value` to populate the resource attributes
 ```hcl
