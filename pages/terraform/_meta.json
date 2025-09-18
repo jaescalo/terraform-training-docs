@@ -1,44 +1,44 @@
 {
   "1-declarative-language": {
-    "title": "Declarative Language"
+    "title": "1. Declarative Language"
   },
   "2-core-workflow": {
-    "title": "Core Workflow"
+    "title": "2. Core Workflow"
   },
   "3-providers": {
-    "title": "Providers"
+    "title": "3. Providers"
   },
   "4-data-sources": {
-    "title": "Data Sources"
+    "title": "4. Data Sources"
   },
   "5-resources": {
-    "title": "Resources"
+    "title": "5. Resources"
   },
   "6-outputs": {
-    "title": "Outputs"
+    "title": "6. Outputs"
   },
   "7-variables": {
-    "title": "Variables"
+    "title": "7. Variables"
   },
   "8-expressions": {
-    "title": "Expressions"
+    "title": "8. Expressions"
   } ,
   "9-meta-arguments": {
-    "title": "Meta-Arguments"
+    "title": "9. Meta-Arguments"
   },
   "10-built-in-functions": {
-    "title": "Built-In Functions"
+    "title": "10. Built-In Functions"
   },
   "11-modules": {
-    "title": "Modules"
+    "title": "11. Modules"
   },
   "12-state-file": {
-    "title": "State File"
+    "title": "12. State File"
   },
   "13-imports": {
-    "title": "Imports"
+    "title": "13. Imports"
   },
   "14-troubleshooting": {
-    "title": "Troubleshooting"
+    "title": "14. Troubleshooting"
   }
 }
