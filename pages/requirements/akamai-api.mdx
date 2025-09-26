@@ -9,14 +9,21 @@ Before we can use Terraform with Akamai, we need to set up API credentials. Thes
 1. Log in to the [Akamai Control Center](https://control.akamai.com/).
 2. Navigate to "Identity & Access" → "API Users & Keys".
 3. Click on "Create API Client".
-4. Fill in the form:
+4. Under "Select API client type" make sure "Myself" is selected on the left, and you choose the "Advanced" option
+![Akamai API Client Creation](/requirements-akamai-api-create1.png)
+5. Fill in the form:
    - Name: Choose a descriptive name (e.g., "Terraform-Akamai")
    - Description: Briefly describe the purpose (e.g., "API client for Terraform automation")
-   - API Service: Select "Property Manager API (PAPI)" and "Security API"
-   - Access Level: Choose "READ-WRITE" for both APIs
-5. Click "Create Client".
-
-![Akamai API Client Creation](/requirements-akamai-api-create.png)
+   - Make sure IP Allowlist is **unchecked**
+   - **Check** the box for "Let this client manage multiple accounts"
+   - **Uncheck** the box for "Let this client create credentials for another API client"
+   - **Check the Select APIs** option, and in the popup select _at least_ these two APIs:
+      - Property Manager API (PAPI) : read/write
+      - Application Security (_not_ the internal version, if this is available): read/write
+   - Under groups, leave the default ("Same groups as |username|") selected
+6. Click "Create API Client".
+![Akamai API Client Creation](/requirements-akamai-api-create2.png)
+7. In the next screen click "Download API Client"
 ![Akamai API Client Download](/requirements-akamai-api-download.png)
 
 <Callout type="warning" emoji="⚠️">
@@ -40,6 +47,8 @@ When you're working with more than one account, move between them using an accou
 
 To use these credentials with Terraform, you can set them as environment variables:
 
+### Mac / Linux
+
 ```bash
 export AKAMAI_CLIENT_SECRET="your_client_secret"
 export AKAMAI_HOST="your_base_url"
@@ -48,10 +57,20 @@ export AKAMAI_CLIENT_TOKEN="your_client_token"
 export AKAMAI_ACCOUNT_KEY="your_account_id"
 ```
 
+### Windows
+
+```powershell
+$env:AKAMAI_CLIENT_SECRET = "your_client_secret"
+$env:AKAMAI_HOST = "your_base_url"
+$env:AKAMAI_ACCESS_TOKEN = "your_access_token"
+$env:AKAMAI_CLIENT_TOKEN = "your_client_token"
+$env:AKAMAI_ACCOUNT_KEY = "your_account_id"
+```
+
 Alternatively, you can use an **_.edgerc_** file, which is a common way to store Akamai credentials:
 
 1. Create a file named **_.edgerc_** in your home directory.
-2. Add the following content:
+2. Add the following content, changing the section header to something other than `default` if you are adding an additional section:
 
 ```text filename=".edgerc" copy
 [default]
@@ -62,6 +81,8 @@ client_token = your_client_token
 account_key = you_account_id
 ```
 The **_.edgerc_** method will be used for the examples and exercises in this course.
+
+> Note: If you use account-switching, it is common practice to have multiple sections in your .edgerc file where the 4 core elements (`host`, `access_token`, `client_token` and `client_secret`) are the same, but the `account_key` differs. This allows you to simply override the `config_section` variable in your terraform to switch between accounts.
 
 ## Best Practices for Akamai API Credential Security
 
