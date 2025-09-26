@@ -28,8 +28,16 @@ Before we start using Terraform with Linode, we need to generate an API key. Thi
 
 To use this API key with Terraform, you'll typically set it as an environment variable:
 
+### Mac / Linux
+
 ```bash
 export LINODE_TOKEN="your_api_token_here"
+```
+
+### Windows
+
+```powershell
+$env:LINODE_TOKEN = "your_api_token_here"
 ```
 
 ## Best Practices for API Key Security
